@@ -1,5 +1,5 @@
-import { OnInit, Component } from "@angular/core";
-import { FormItemValidator } from "../FormValidator";
+import { OnInit, Component, Input, Output, EventEmitter } from "@angular/core";
+import { FormItemConfig, HttpMethod } from "../FormConfig";
 
 @Component({
     selector: 'ns-select',
@@ -7,36 +7,28 @@ import { FormItemValidator } from "../FormValidator";
 })
 export class NsSelectComponent<T> implements OnInit {
 
+    @Input() config:SelectConfig<T>;
+    @Output() onChange = new EventEmitter<T>();
+
     constructor() {
 
     }
 
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        
     }
 }
 
-export interface SelectItem<T> {
+export interface SelectOption<T> {
     id: T;
     value: string;
 }
 
-export enum FormItemType {
-    SELECT,CHECKBOX,RADIO,TEXT,DATETIME,DATETIME_RANGE,REGION
-}
-
-export interface FormItemConfig<T> {
-    id: string;
-    label: string;
-    type: FormItemType;
-    textField: string;
-    valueField: T;
-    rules: any;
-}
-
-export interface SelectItemConfig<T> extends FormItemConfig<T> {
+export interface SelectConfig<T> extends FormItemConfig<T> {
     multiple: boolean;
-    rules: FormItemValidator<T>;
-    subdata: SelectItem<T>[];
-    changeHandler: (value:T)=> void;
+    subdata?: SelectOption<T>[];
+    url?: string;
+    method?: HttpMethod;
+    params?: Array<any>;
+    dataSrc?: string;
 }
