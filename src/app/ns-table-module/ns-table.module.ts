@@ -12,4 +12,4 @@ import { CommonModule } from '@angular/common';
   exports: [],
   providers: []
 })
-export class NsForm { }
+export class NsTable { }

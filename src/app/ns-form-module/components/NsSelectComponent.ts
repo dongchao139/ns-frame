@@ -1,5 +1,5 @@
-import { OnInit, Component, Input, Output, EventEmitter } from "@angular/core";
-import { FormItemConfig, HttpMethod } from "../FormConfig";
+import { OnInit, Component, Input, Output, EventEmitter, Type } from "@angular/core";
+import { SelectConfig } from "../FormConfig";
 
 @Component({
     selector: 'ns-select',
@@ -7,28 +7,15 @@ import { FormItemConfig, HttpMethod } from "../FormConfig";
 })
 export class NsSelectComponent<T> implements OnInit {
 
-    @Input() config:SelectConfig<T>;
+    @Input() config: SelectConfig<T>;
     @Output() onChange = new EventEmitter<T>();
+
 
     constructor() {
 
     }
 
     ngOnInit(): void {
-        
+
     }
-}
-
-export interface SelectOption<T> {
-    id: T;
-    value: string;
-}
-
-export interface SelectConfig<T> extends FormItemConfig<T> {
-    multiple: boolean;
-    subdata?: SelectOption<T>[];
-    url?: string;
-    method?: HttpMethod;
-    params?: Array<any>;
-    dataSrc?: string;
 }
