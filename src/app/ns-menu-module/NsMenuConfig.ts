@@ -6,10 +6,19 @@ export class MenuItem {
 
     constructor(public menuName: string, 
                 public url:string, 
+                public level: number,
                 public children?: MenuItem[]) {
         this.onMouseOver = false;
     }
-    
+
+    checkChildrenShow(): boolean {
+        if (this.onMouseOver) {
+            return true;
+        }
+        return this.children && this.children
+            .filter(child => child.onMouseOver || child.checkChildrenShow())
+            .length > 0;
+    }
 }
 
 export class NsMenu {
