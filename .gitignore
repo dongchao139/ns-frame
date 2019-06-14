@@ -42,3 +42,10 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# semantic sources
+/semantic/src
+/semantic/tasks
+/semantic/gulpfile.js
+/semantic/dist/components
+/semantic/dist/themes
