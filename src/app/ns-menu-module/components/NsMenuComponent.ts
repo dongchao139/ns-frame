@@ -5,7 +5,7 @@ import { MenuItem } from "../NsMenuConfig";
     selector: 'ns-menu',
     template: `
     <ul [class.toplevel]='topLevel()' [class.secondlevel]='secondLevel()' 
-        [class.greeterlevel]='greaterLevel()'>
+        [class.greeterlevel]='!topLevel() && !secondLevel()'>
         <ns-menu-item *ngFor="let oneMenu of menuList" [menuItem]="oneMenu"
             (clickEvent)='onClick(oneMenu)'>
         </ns-menu-item>
@@ -32,13 +32,6 @@ export class NsMenuComponent {
         return false;
     }
 
-    greaterLevel():boolean {
-        if (this.menuList && this.menuList.length > 0) {
-            return this.menuList[0].level >= 3;
-        }
-        return false;
-    }
-
     onClick(menuItem: MenuItem) {
         this.clickMenu.emit(menuItem);
     }
@@ -49,7 +42,7 @@ export class NsMenuComponent {
     template: `
     <li (click)='onClick()' (mouseover)='onMouseOver()' (mouseout)='onMouseOut()' 
         [class.toplevel]='menuItem.level==1' [class.secondlevel]='menuItem.level==2' 
-        [class.greeterlevel]='menuItem.level>=3'>
+        [class.greeterlevel]='menuItem.level>2'>
         <a href='menuItem.url'>{{menuItem.menuName}}</a>
         <ns-menu *ngIf='menuItem.children' [menuList]='menuItem.children' 
             [hidden]='!menuItem.onMouseOver'>
