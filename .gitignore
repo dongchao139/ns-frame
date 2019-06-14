@@ -49,3 +49,5 @@ Thumbs.db
 /semantic/gulpfile.js
 /semantic/dist/components
 /semantic/dist/themes
+/semantic/dist/semantic.js
+/semantic/dist/semantic.rtl.css
