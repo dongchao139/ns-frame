@@ -8,7 +8,8 @@ import { NsForm } from './ns-form-module/ns-form.module';
 import { NsMenuModule } from './ns-menu-module/ns-menu.module';
 import { MenuService } from './home/MenuService';
 import { DynamicLoadDirective } from './home/DynamicLoadDirective';
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ClarityModule } from "@clr/angular";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { DynamicLoadDirective } from './home/DynamicLoadDirective';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ClarityModule,
     AppRoutingModule,
     NsForm,
     NsMenuModule
