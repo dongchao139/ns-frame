@@ -1,8 +1,8 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild } from "@angular/core";
 import { FormItemDirective } from "../directives/FormItemDirective";
 import { NsSelectComponent } from "./NsSelectComponent";
 import { FormItemType, NsSelect, FormConfig } from "../FormConfig";
 import { DynamicComponent } from "../../home/NsComponent";
+import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'ns-form',
@@ -16,7 +16,7 @@ import { DynamicComponent } from "../../home/NsComponent";
 })
 export class NsFormComponent implements OnInit, DynamicComponent {
 
-    @ViewChild(FormItemDirective)
+    @ViewChild(FormItemDirective, { static: true })
     formItem: FormItemDirective;
     data: FormConfig;
 

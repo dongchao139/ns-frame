@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { MenuItem } from "../NsMenuConfig";
+import { Input, Output, EventEmitter, Component } from '@angular/core';
 
 @Component({
     selector: 'ns-menu',

@@ -1,4 +1,4 @@
-import { Type } from "@angular/core";
+import { Type } from '@angular/core';
 
 export enum HttpMethod {
     GET, POST, PUT, DELETE

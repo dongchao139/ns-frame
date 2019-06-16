@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NsFormComponent } from './components/NsFormComponent';
 import { NsSelectComponent } from './components/NsSelectComponent';
 import { FormItemDirective } from './directives/FormItemDirective';
-
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import { FormItemDirective } from './directives/FormItemDirective';
     FormItemDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   exports: [NsFormComponent],
   providers: [],

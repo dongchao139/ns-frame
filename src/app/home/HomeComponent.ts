@@ -1,11 +1,11 @@
-import { Component, ViewChild, ComponentFactoryResolver, OnInit, OnChanges, Injector } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild } from "@angular/core";
 import { DynamicLoadDirective } from "./DynamicLoadDirective";
 import { NsComponent, DynamicComponent } from "./NsComponent";
 import { MenuService } from "./MenuService";
 import { NsMenu, MenuItem } from "../ns-menu-module/NsMenuConfig";
 import { FormConfig } from "../ns-form-module/FormConfig";
 import { NsFormComponent } from "../ns-form-module/components/NsFormComponent";
-import * as $ from 'jquery'
+import * as $ from 'jquery';
 
 @Component({
     selector: 'home',
@@ -18,7 +18,7 @@ import * as $ from 'jquery'
 })
 export class HomeComponent implements OnInit {
 
-    @ViewChild(DynamicLoadDirective)
+    @ViewChild(DynamicLoadDirective, { static: true })
     dynamicComponent: DynamicLoadDirective;
     menus: NsMenu;
 

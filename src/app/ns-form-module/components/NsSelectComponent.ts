@@ -1,5 +1,5 @@
-import { OnInit, Component, Input, Output, EventEmitter, Type } from "@angular/core";
 import { SelectConfig } from "../FormConfig";
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
     selector: 'ns-select',
