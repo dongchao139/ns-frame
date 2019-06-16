@@ -10,11 +10,27 @@ import * as $ from 'jquery';
 @Component({
     selector: 'home',
     template: `
-    <nav>
-        <ns-menu [menuList]='menus.data' (clickMenu)='loadComponentByMenu($event)'></ns-menu>
-    </nav><div style='clear:both'></div>
-    <ng-template dynamic-load></ng-template>
-    `
+    <div class="main-container">
+        <nav class="subnav">
+            <ns-menu [menuList]='menus.data' (clickMenu)='loadComponentByMenu($event)'></ns-menu>
+        </nav><div style='clear:both'></div>
+        <div class="content-container">
+            <div class="content-area">
+                <ng-template dynamic-load></ng-template>
+            </div>
+        </div>
+    </div>
+    `,
+    styles: [`
+    .subnav {
+        padding-left:5% !important;
+        padding-right: 5% !important;
+    }
+    .content-container {
+        padding-left:5% !important;
+        padding-right: 5% !important;
+    }
+    `]
 })
 export class HomeComponent implements OnInit {
 
