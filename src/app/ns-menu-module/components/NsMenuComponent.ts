@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { MenuItem } from "../NsMenuConfig";
 
 @Component({
@@ -14,6 +14,7 @@ import { MenuItem } from "../NsMenuConfig";
     styleUrls: ['../ns-menu.css']
 })
 export class NsMenuComponent {
+   
     @Input() menuList: MenuItem[];
     @Output() clickMenu: EventEmitter<MenuItem> = new EventEmitter<MenuItem>();
     constructor() { }
@@ -43,7 +44,7 @@ export class NsMenuComponent {
     <li (click)='onClick()' (mouseover)='onMouseOver()' (mouseout)='onMouseOut()' 
         [class.toplevel]='menuItem.level==1' [class.secondlevel]='menuItem.level==2' 
         [class.greeterlevel]='menuItem.level>2'>
-        <a href='menuItem.url'>{{menuItem.menuName}}</a>
+        <a href="javascript:void(0);">{{menuItem.menuName}}</a>
         <ns-menu *ngIf='menuItem.children' [menuList]='menuItem.children' 
             [hidden]='!menuItem.onMouseOver'>
         </ns-menu>

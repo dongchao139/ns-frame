@@ -16,6 +16,6 @@ import { FormItemDirective } from './directives/FormItemDirective';
   ],
   exports: [NsFormComponent],
   providers: [],
-  entryComponents:[NsSelectComponent]
+  entryComponents:[NsSelectComponent,NsFormComponent]
 })
 export class NsForm { }
