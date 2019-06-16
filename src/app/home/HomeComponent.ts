@@ -58,6 +58,9 @@ export class HomeComponent implements OnInit {
             var formConfig: FormConfig = this.menuService.getComponentConfig(url);
             var component: NsComponent<FormConfig> = new NsComponent(NsFormComponent, formConfig);
             this.loadComponent(component);
+        } else {
+            let viewContainerRef = this.dynamicComponent.viewContainerRef;
+            viewContainerRef.clear();
         }
     }
 
