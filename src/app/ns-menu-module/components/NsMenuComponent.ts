@@ -1,5 +1,5 @@
-import { MenuItem } from "../NsMenuConfig";
-import { Input, Output, EventEmitter, Component } from '@angular/core';
+import {MenuItem} from '../NsMenuConfig';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
     selector: 'ns-menu',
@@ -44,7 +44,9 @@ export class NsMenuComponent {
     <li (click)='onClick()' (mouseover)='onMouseOver()' (mouseout)='onMouseOut()' 
         [class.toplevel]='menuItem.level==1' [class.secondlevel]='menuItem.level==2' 
         [class.greeterlevel]='menuItem.level>2'>
-        <a href="javascript:void(0);">{{menuItem.menuName}}</a>
+        <a href="javascript:void(0);">{{menuItem.menuName}}
+          <span *ngIf="menuItem.children && menuItem.level> 1" class="dropdown-arrow">\></span>
+        </a>
         <ns-menu *ngIf='menuItem.children' [menuList]='menuItem.children' 
             [hidden]='!menuItem.onMouseOver'>
         </ns-menu>

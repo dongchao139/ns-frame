@@ -1,10 +1,10 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild } from "@angular/core";
-import { DynamicLoadDirective } from "./DynamicLoadDirective";
-import { NsComponent, DynamicComponent } from "./NsComponent";
-import { MenuService } from "./MenuService";
-import { NsMenu, MenuItem } from "../ns-menu-module/NsMenuConfig";
-import { FormConfig } from "../ns-form-module/FormConfig";
-import { NsFormComponent } from "../ns-form-module/components/NsFormComponent";
+import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
+import {DynamicLoadDirective} from './DynamicLoadDirective';
+import {DynamicComponent, NsComponent} from './NsComponent';
+import {MenuService} from './MenuService';
+import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
+import {FormConfig} from '../ns-form-module/FormConfig';
+import {NsFormComponent} from '../ns-form-module/components/NsFormComponent';
 import * as $ from 'jquery';
 
 @Component({
