@@ -11,8 +11,14 @@ import * as $ from 'jquery';
     selector: 'home',
     template: `
     <div class="main-container">
-        <nav class="subnav">
+        <header class="header-6">
+        
+        </header>
+        <header class="header-6 sub-header">
             <ns-menu [menuList]='menus.data' (clickMenu)='loadComponentByMenu($event)'></ns-menu>
+        </header>
+        <nav class="subnav">
+            
         </nav><div style='clear:both'></div>
         <div class="content-container">
             <div class="content-area">
@@ -22,13 +28,24 @@ import * as $ from 'jquery';
     </div>
     `,
     styles: [`
-    .subnav {
-        padding-left:5% !important;
-        padding-right: 5% !important;
+    .main-container .header, .main-container header {
+        flex: 0 0 1.5rem;
+    }
+    .header.header-6, header.header-6 {
+        background-color: rgb(71,111,154);
+    }
+    .sub-header {
+        border-top:1px solid rgb(47,73,102);
+        padding-left: 1.5%;
+        padding-right: 1.5%;
+    }
+    .main-container .sub-nav, .main-container .subnav {
+        background-color: #ddd;
+        flex: 0 0 1.2rem;
     }
     .content-container {
-        padding-left:5% !important;
-        padding-right: 5% !important;
+        padding-left: 1.5% !important;
+        padding-right: 1.5% !important;
     }
     `]
 })
