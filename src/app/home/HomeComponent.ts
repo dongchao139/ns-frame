@@ -67,6 +67,8 @@ export class HomeComponent implements OnInit {
             var number = this.tabs.length - 1;
             if (number >= 0) {
                 this.tabs[number].active = true;
+                //切换tab页时,记录锚点路由
+                location.hash = this.tabs[number].url;
             }
         }
     }
