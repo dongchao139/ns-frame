@@ -23,9 +23,9 @@ import * as $ from 'jquery';
             {{ tab.title }}
           </a>
         </nav><div style='clear:both'></div>
-      <ns-tab *ngFor="let tab of tabs" [tabItem]="tab"></ns-tab>
       <div class="content-container">
             <div class="content-area">
+              <ns-tab *ngFor="let tab of tabs" [tabItem]="tab"></ns-tab>
                 <ng-template dynamic-load></ng-template>
             </div>
         </div>
