@@ -1,4 +1,5 @@
-import { Type } from '@angular/core';
+import {Type} from '@angular/core';
+import {NavTabItem} from '../ns-menu-module/NsMenuConfig';
 
 export enum HttpMethod {
     GET, POST, PUT, DELETE
@@ -15,6 +16,7 @@ export interface FormConfig {
     method?: HttpMethod;
     action?: string;
     itemConfigs: FormItemConfig[];
+    tabItem: NavTabItem;
 }
 
 export enum FormItemType {

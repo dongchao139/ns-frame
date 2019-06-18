@@ -19,7 +19,7 @@ export class NavTabComponent implements OnInit{
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
-    console.log(this.tabItem);
+
   }
 
   loadComponent(nsComponent: NsComponent<any>) {

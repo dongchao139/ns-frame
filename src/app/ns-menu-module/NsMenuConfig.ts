@@ -1,11 +1,11 @@
-import { Type } from "@angular/core";
+import {Type} from "@angular/core";
 
 export class MenuItem {
 
     onMouseOver: boolean;
 
-    constructor(public menuName: string, 
-                public url:string, 
+    constructor(public menuName: string,
+                public url: string,
                 public level: number,
                 public children?: MenuItem[]) {
         this.onMouseOver = false;
@@ -22,11 +22,14 @@ export class MenuItem {
 }
 
 export class NsMenu {
-    constructor(public component: Type<any>, public data: MenuItem[]) { }
+    constructor(public component: Type<any>, public data: MenuItem[]) {
+
+    }
 }
 
 export class NavTabItem {
-  title: string;
-  content: string;
-  active?:boolean;
+    title: string;
+    content: string;
+    url?: string;
+    active?: boolean;
 }

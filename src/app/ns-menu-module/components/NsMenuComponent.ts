@@ -4,20 +4,22 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 @Component({
     selector: 'ns-menu',
     template: `
-    <ul [class.toplevel]='topLevel()' [class.secondlevel]='secondLevel()' 
-        [class.greeterlevel]='!topLevel() && !secondLevel()'>
-        <ns-menu-item *ngFor="let oneMenu of menuList" [menuItem]="oneMenu"
-            (clickEvent)='onClick(oneMenu)'>
-        </ns-menu-item>
-    </ul>
+        <ul [class.toplevel]='topLevel()' [class.secondlevel]='secondLevel()'
+            [class.greeterlevel]='!topLevel() && !secondLevel()'>
+            <ns-menu-item *ngFor="let oneMenu of menuList" [menuItem]="oneMenu"
+                          (clickEvent)='onClick($event)'>
+            </ns-menu-item>
+        </ul>
     `,
     styleUrls: ['../ns-menu.css']
 })
 export class NsMenuComponent {
-   
+
     @Input() menuList: MenuItem[];
     @Output() clickMenu: EventEmitter<MenuItem> = new EventEmitter<MenuItem>();
-    constructor() { }
+
+    constructor() {
+    }
 
     topLevel(): boolean {
         if (this.menuList && this.menuList.length > 0) {
@@ -26,7 +28,7 @@ export class NsMenuComponent {
         return false;
     }
 
-    secondLevel():boolean {
+    secondLevel(): boolean {
         if (this.menuList && this.menuList.length > 0) {
             return this.menuList[0].level == 2;
         }
@@ -41,16 +43,16 @@ export class NsMenuComponent {
 @Component({
     selector: 'ns-menu-item',
     template: `
-    <li (click)='onClick()' (mouseover)='onMouseOver()' (mouseout)='onMouseOut()' 
-        [class.toplevel]='menuItem.level==1' [class.secondlevel]='menuItem.level==2' 
-        [class.greeterlevel]='menuItem.level>2'>
-        <a href="javascript:void(0);">{{menuItem.menuName}}
-          <span *ngIf="menuItem.children && menuItem.level> 1" class="dropdown-arrow">\></span>
-        </a>
-        <ns-menu *ngIf='menuItem.children' [menuList]='menuItem.children' 
-            [hidden]='!menuItem.onMouseOver'>
-        </ns-menu>
-    </li>
+        <li (mouseover)='onMouseOver()' (mouseout)='onMouseOut()'
+            [class.toplevel]='menuItem.level==1' [class.secondlevel]='menuItem.level==2'
+            [class.greeterlevel]='menuItem.level>2'>
+            <a (click)='onClick(null)' href="javascript:void(0);">{{menuItem.menuName}}
+                <span *ngIf="menuItem.children && menuItem.level> 1" class="dropdown-arrow">\></span>
+            </a>
+            <ns-menu *ngIf='menuItem.children' [menuList]='menuItem.children'
+                     [hidden]='!menuItem.onMouseOver' (clickMenu)="onClick($event)">
+            </ns-menu>
+        </li>
     `,
     styleUrls: ['../ns-menu.css']
 })
@@ -58,8 +60,12 @@ export class MenuItemComponent {
     @Input() menuItem: MenuItem;
     @Output() clickEvent: EventEmitter<MenuItem> = new EventEmitter<MenuItem>();
 
-    onClick() {
-        this.clickEvent.emit(this.menuItem);
+    onClick(menuItem: MenuItem) {
+        if (menuItem && !menuItem.children) {
+            this.clickEvent.emit(menuItem);
+        } else if(!this.menuItem.children) {
+            this.clickEvent.emit(this.menuItem);
+        }
     }
 
     onMouseOver() {
