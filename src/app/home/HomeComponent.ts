@@ -2,7 +2,7 @@ import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/c
 import {DynamicLoadDirective} from './DynamicLoadDirective';
 import {DynamicComponent, NsComponent} from './NsComponent';
 import {MenuService} from './MenuService';
-import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
+import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
 import {NsFormComponent} from '../ns-form-module/components/NsFormComponent';
 import * as $ from 'jquery';
@@ -17,10 +17,14 @@ import * as $ from 'jquery';
         <header class="header-6 sub-header">
             <ns-menu [menuList]='menus.data' (clickMenu)='loadComponentByMenu($event)'></ns-menu>
         </header>
-        <nav class="subnav">
-            
+        <nav class="subnav" [class.active]="active">
+          <a href="javascript:void(0);" *ngFor="let tab of tabs" class="item"
+             [class.active]="tab.active" (click)="setActive(tab)">
+            {{ tab.title }}
+          </a>
         </nav><div style='clear:both'></div>
-        <div class="content-container">
+      <ns-tab *ngFor="let tab of tabs" [tabItem]="tab"></ns-tab>
+      <div class="content-container">
             <div class="content-area">
                 <ng-template dynamic-load></ng-template>
             </div>
@@ -28,7 +32,7 @@ import * as $ from 'jquery';
     </div>
     `,
     styles: [`
-    .main-container .header, .main-container header {
+    .main-container, .main-container header {
         flex: 0 0 1.5rem;
     }
     .header.header-6, header.header-6 {
@@ -47,6 +51,13 @@ import * as $ from 'jquery';
         padding-left: 1.5% !important;
         padding-right: 1.5% !important;
     }
+    .subnav {
+      justify-content: left;
+    } 
+    .subnav > a {
+      margin-left: 1rem;
+      text-decoration: none;
+    }  
     `]
 })
 export class HomeComponent implements OnInit {
@@ -54,9 +65,23 @@ export class HomeComponent implements OnInit {
     @ViewChild(DynamicLoadDirective, { static: true })
     dynamicComponent: DynamicLoadDirective;
     menus: NsMenu;
+    active: boolean;
+    tabs: NavTabItem[];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-        private menuService: MenuService) { }
+        private menuService: MenuService) {
+      //TODO 点击菜单时,动态创建
+      this.tabs = [
+        { title: 'About', content: 'This is the About tab' },
+        { title: 'Blog', content: 'This is our blog' },
+        { title: 'Contact us', content: 'Contact us here' },
+      ];
+    }
+
+    setActive(tab: NavTabItem) {
+      this.tabs.forEach((t) => t.active = false);
+      tab.active = true;
+    }
 
     ngOnInit(): void {
         this.menus = this.menuService.getMenus();

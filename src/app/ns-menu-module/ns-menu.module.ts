@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { NsMenuComponent, MenuItemComponent } from './components/NsMenuComponent';
 import { CommonModule } from '@angular/common';
+import {NavTabComponent} from './components/NavTabComponent';
 
 @NgModule({
   declarations: [
     NsMenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    NavTabComponent
   ],
   imports: [
     CommonModule
   ],
-  exports: [NsMenuComponent],
+  exports: [NsMenuComponent,NavTabComponent],
   providers: [],
   entryComponents: [NsMenuComponent]
 })

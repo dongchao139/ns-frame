@@ -52,7 +52,7 @@ export class MenuService {
             method: HttpMethod.GET,
             action: url,
             itemConfigs: []
-        }
+        };
         return FormConfig;
     }
 }

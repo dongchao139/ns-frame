@@ -24,3 +24,9 @@ export class MenuItem {
 export class NsMenu {
     constructor(public component: Type<any>, public data: MenuItem[]) { }
 }
+
+export class NavTabItem {
+  title: string;
+  content: string;
+  active?:boolean;
+}

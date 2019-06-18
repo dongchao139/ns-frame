@@ -6,7 +6,7 @@ import { NsForm } from './ns-form-module/ns-form.module';
 import { NsMenuModule } from './ns-menu-module/ns-menu.module';
 import { MenuService } from './home/MenuService';
 import { DynamicLoadDirective } from './home/DynamicLoadDirective';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
