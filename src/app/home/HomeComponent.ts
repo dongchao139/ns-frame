@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from './DynamicLoadDirective';
 import {NsComponent} from './NsComponent';
 import {MenuService} from './MenuService';
@@ -6,6 +6,8 @@ import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
 import {NsFormComponent} from '../ns-form-module/components/NsFormComponent';
 import * as $ from 'jquery';
+import {DynamicDemo} from "../dynamic/DynamicDemo";
+import {ContentProjectDemo} from "../dynamic/ContentProjectDemo";
 
 @Component({
     selector: 'home',
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
     tabs: NavTabItem[];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
+                private injector: Injector,
                 private menuService: MenuService) {
         this.tabs = [];
     }
@@ -115,12 +118,34 @@ export class HomeComponent implements OnInit {
         var navTabItem = this.tabs.filter(tab => tab.title == tabItem.title)[0];
         navTabItem.active = true;
     }
+    /**
+     * 动态创建组件,同时添加动态内容投影示例
+     *
+     * ComponentFactoryResolver  组件工厂解析器,负责创建具体组件对应的组件工厂,通过依赖注入获得
+     *      相当于DefaultListableBeanDefinitionDocumentReader
+     * Injector  依赖注入器,相当于ApplicationContext,通过依赖注入获得
+     * ComponentFactory  组件工厂,每一个组件对应一个组件工厂.相当于FactoryBean
+     * ComponentRef  组件的引用, 可以用viewContainerRef创建,也可以用ComponentFactory创建
+     * result: any[][]  投影元素的dom对象
+     * ViewContainerRef  视图容器的引用, 通过自定义指令获得
+     *
+     * @param nsComponent
+     */
 
     loadComponent(nsComponent: NsComponent<any>) {
-        /*let componentFactory = this.componentFactoryResolver.resolveComponentFactory(nsComponent.component);
+        //创建动态内容投影元素
+        let contentProjectComponent = new NsComponent(ContentProjectDemo);
+        let contentProjectFactory = this.componentFactoryResolver
+            .resolveComponentFactory(contentProjectComponent.component);
+        let crf = contentProjectFactory.create(this.injector);
+        let result: any[][] = [[crf.location.nativeElement]];
+
+        //创建动态元素
+        let demoComponent = new NsComponent(DynamicDemo);
+        let demoComponentFactory = this.componentFactoryResolver
+            .resolveComponentFactory(demoComponent.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        let componentRef = viewContainerRef.createComponent(componentFactory);
-        (<DynamicComponent>componentRef.instance).data = nsComponent.data;*/
+        viewContainerRef.createComponent(demoComponentFactory, 0, this.injector, result);
     }
 }
