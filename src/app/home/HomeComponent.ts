@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from './DynamicLoadDirective';
 import {NsComponent} from './NsComponent';
 import {MenuService} from './MenuService';
@@ -6,6 +6,8 @@ import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
 import {NsFormComponent} from '../ns-form-module/components/NsFormComponent';
 import * as $ from 'jquery';
+import * as XLSX from 'xlsx';
+import {WorkBook, WorkSheet} from 'xlsx';
 import {DynamicDemo} from "../dynamic/DynamicDemo";
 import {ContentProjectDemo} from "../dynamic/ContentProjectDemo";
 
@@ -85,6 +87,18 @@ export class HomeComponent implements OnInit {
         $(window).on('hashchange', function () {
             self.loadComponentByHash();
         });
+        var workSheet: WorkSheet = XLSX.utils.json_to_sheet([
+            { S:1, h:2, e:3, e_1:4, t:5, J:6, S_1:7 },
+            { S:2, h:3, e:4, e_1:5, t:6, J:7, S_1:8 }
+        ], {header:["S","h","e","e_1","t","J","S_1"]});
+        console.log(workSheet);
+        var workbook: WorkBook = {
+            Sheets: {
+                'sheet1': workSheet
+            },
+            SheetNames: ['sheet1']
+        };
+        XLSX.writeFile(workbook, 'out.xlsx');
     }
 
     loadComponentByHash() {
@@ -137,7 +151,7 @@ export class HomeComponent implements OnInit {
         let contentProjectComponent = new NsComponent(ContentProjectDemo);
         let contentProjectFactory = this.componentFactoryResolver
             .resolveComponentFactory(contentProjectComponent.component);
-        let crf = contentProjectFactory.create(this.injector);
+        let crf: ComponentRef<ContentProjectDemo> = contentProjectFactory.create(this.injector);
         let result: any[][] = [[crf.location.nativeElement]];
 
         //创建动态元素
