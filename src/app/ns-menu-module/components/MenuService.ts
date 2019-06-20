@@ -46,7 +46,7 @@ export class MenuService {
 
     getComponentConfig(url: string): FormConfig {
         var FormConfig: FormConfig = {
-            id: 'form-1' + url,
+            id: 'form-' + url,
             title: 'form demo ' + url,
             size: FormSize.MIDDLE,
             method: HttpMethod.GET,

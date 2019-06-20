@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
 
     addTab(formConfig: FormConfig) {
         //打开tab页
-        if (this.forms.filter(tab => tab.title == formConfig.tabItem.title).length == 0) {
+        if (this.forms.filter(form => form.id == formConfig.id).length == 0) {
             this.forms.push(formConfig);
         }
         this.setActive(formConfig);
@@ -69,7 +69,8 @@ export class HomeComponent implements OnInit {
         this.forms.forEach((f) => f.tabItem.active = false);
         //切换tab页时,记录锚点路由
         location.hash = formConfig.tabItem.url;
-        formConfig.tabItem.active = true;
+        var filterElement = this.forms.filter(f => f.id == formConfig.id)[0];
+        filterElement.tabItem.active  = true;
     }
 
     closeTab(formConfig: FormConfig) {

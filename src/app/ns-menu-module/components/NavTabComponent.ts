@@ -9,8 +9,10 @@ import {DynamicDemo} from "../dynamic/DynamicDemo";
 @Component({
     selector: 'ns-tab',
     template: `
-        <p [hidden]="!formConfig.tabItem.active">{{formConfig.tabItem.content}}</p>
-        <ng-template dynamic-load></ng-template>
+        <p [hidden]="!formConfig.tabItem.active">{{formConfig.tabItem.content}}
+            <br/>
+            <ng-template dynamic-load></ng-template>
+        </p>
     `
 })
 export class NavTabComponent implements OnInit {
@@ -47,7 +49,7 @@ export class NavTabComponent implements OnInit {
         let contentProjectFactory = this.componentFactoryResolver
             .resolveComponentFactory(contentProjectComponent.component);
         let crf: ComponentRef<DynamicComponent> = contentProjectFactory.create(this.injector);
-        crf.instance.data = "demo content " + formConfig.method;
+        crf.instance.data = "demo content " + formConfig.title;
         (<ContentProjectDemo>crf.instance).cd.detectChanges();
         let result: any[][] = [[crf.location.nativeElement]];
 
@@ -59,6 +61,6 @@ export class NavTabComponent implements OnInit {
         viewContainerRef.clear();
         var dynamicComponentComponentRef = viewContainerRef
             .createComponent(demoComponentFactory, 0, this.injector, result);
-        dynamicComponentComponentRef.instance.data = "demo dynamic content " + formConfig.title;
+        dynamicComponentComponentRef.instance.data = "demo dynamic content " + formConfig.action;
     }
 }
