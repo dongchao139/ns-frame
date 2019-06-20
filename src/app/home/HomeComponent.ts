@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from './DynamicLoadDirective';
-import {NsComponent} from './NsComponent';
+import {DynamicComponent, NsComponent} from './NsComponent';
 import {MenuService} from './MenuService';
 import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
             },
             SheetNames: ['sheet1']
         };
-        XLSX.writeFile(workbook, 'out.xlsx');
+        //XLSX.writeFile(workbook, 'out.xlsx');
     }
 
     loadComponentByHash() {
@@ -140,6 +140,7 @@ export class HomeComponent implements OnInit {
      * Injector  依赖注入器,相当于ApplicationContext,通过依赖注入获得
      * ComponentFactory  组件工厂,每一个组件对应一个组件工厂.相当于FactoryBean
      * ComponentRef  组件的引用, 可以用viewContainerRef创建,也可以用ComponentFactory创建
+     * ChangeDetectorRef 变更检测器, 每个组件都有自己的变更检测器
      * result: any[][]  投影元素的dom对象
      * ViewContainerRef  视图容器的引用, 通过自定义指令获得
      *
@@ -151,7 +152,9 @@ export class HomeComponent implements OnInit {
         let contentProjectComponent = new NsComponent(ContentProjectDemo);
         let contentProjectFactory = this.componentFactoryResolver
             .resolveComponentFactory(contentProjectComponent.component);
-        let crf: ComponentRef<ContentProjectDemo> = contentProjectFactory.create(this.injector);
+        let crf: ComponentRef<DynamicComponent> = contentProjectFactory.create(this.injector);
+        crf.instance.data = "demo content";
+        (<ContentProjectDemo>crf.instance).cd.detectChanges();
         let result: any[][] = [[crf.location.nativeElement]];
 
         //创建动态元素
@@ -160,6 +163,8 @@ export class HomeComponent implements OnInit {
             .resolveComponentFactory(demoComponent.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        viewContainerRef.createComponent(demoComponentFactory, 0, this.injector, result);
+        var dynamicComponentComponentRef = viewContainerRef
+            .createComponent(demoComponentFactory, 0, this.injector, result);
+        dynamicComponentComponentRef.instance.data = "demo dynamic content";
     }
 }

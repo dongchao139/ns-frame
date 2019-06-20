@@ -4,7 +4,8 @@ import {DynamicComponent} from "../home/NsComponent";
 @Component({
     selector: 'dynamic-demo',
     template: `
-        <p>dynamic demo
+        <p>dynamic demo: {{data}}
+            <br/>
             <ng-content></ng-content>
         </p>
     `
