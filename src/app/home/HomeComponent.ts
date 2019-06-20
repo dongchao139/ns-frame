@@ -1,6 +1,5 @@
 import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
-import {DynamicComponent, NsComponent} from './NsComponent';
 import {MenuService} from '../ns-menu-module/components/MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
@@ -57,7 +56,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    addTab(formConfig: FormConfig) {
+    openTab(formConfig: FormConfig) {
         //打开tab页
         if (this.forms.filter(form => form.id == formConfig.id).length == 0) {
             this.forms.push(formConfig);
@@ -70,7 +69,7 @@ export class HomeComponent implements OnInit {
         //切换tab页时,记录锚点路由
         location.hash = formConfig.tabItem.url;
         var filterElement = this.forms.filter(f => f.id == formConfig.id)[0];
-        filterElement.tabItem.active  = true;
+        filterElement.tabItem.active = true;
     }
 
     closeTab(formConfig: FormConfig) {
@@ -94,7 +93,7 @@ export class HomeComponent implements OnInit {
         let url = location.hash.substr(1);
         if (url) {
             let formConfig: FormConfig = this.menuService.getComponentConfig(url);
-            this.addTab(formConfig);
+            this.openTab(formConfig);
         }
     }
 
@@ -102,15 +101,7 @@ export class HomeComponent implements OnInit {
         let formConfig: FormConfig = this.menuService.getComponentConfig(menuItem.url);
         //记录锚点路由
         location.hash = menuItem.url;
-        this.addTab(formConfig);
-    }
-
-    loadComponent(nsComponent: NsComponent<any>) {
-        let componentFactory = this.componentFactoryResolver.resolveComponentFactory(nsComponent.component);
-        let viewContainerRef = this.dynamicComponent.viewContainerRef;
-        viewContainerRef.clear();
-        let componentRef = viewContainerRef.createComponent(componentFactory);
-        (<DynamicComponent>componentRef.instance).data = nsComponent.data;
+        this.openTab(formConfig);
     }
 
 }

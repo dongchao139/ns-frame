@@ -9,7 +9,8 @@ import {DynamicDemo} from "../dynamic/DynamicDemo";
 @Component({
     selector: 'ns-tab',
     template: `
-        <p [hidden]="!formConfig.tabItem.active">{{formConfig.tabItem.content}}
+        <p [hidden]="!formConfig.tabItem.active">
+            {{formConfig.tabItem.content}}
             <br/>
             <ng-template dynamic-load></ng-template>
         </p>
