@@ -1,15 +1,10 @@
-import {Component, ComponentFactoryResolver, ComponentRef, Injector, OnInit, ViewChild} from '@angular/core';
-import {DynamicLoadDirective} from './DynamicLoadDirective';
+import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
+import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
 import {DynamicComponent, NsComponent} from './NsComponent';
-import {MenuService} from './MenuService';
-import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
+import {MenuService} from '../ns-menu-module/components/MenuService';
+import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
-import {NsFormComponent} from '../ns-form-module/components/NsFormComponent';
-import * as $ from 'jquery';
-import * as XLSX from 'xlsx';
-import {WorkBook, WorkSheet} from 'xlsx';
-import {DynamicDemo} from "../dynamic/DynamicDemo";
-import {ContentProjectDemo} from "../dynamic/ContentProjectDemo";
+import * as $ from "jquery";
 
 @Component({
     selector: 'home',
@@ -19,21 +14,19 @@ import {ContentProjectDemo} from "../dynamic/ContentProjectDemo";
 
             </header>
             <header class="header-6 sub-header">
-                <ns-menu [menuList]='menus.data' (clickMenu)='loadComponentByMenu($event)'></ns-menu>
+                <ns-menu [menuList]='menus.data' (clickMenu)='loadTabByMenu($event)'></ns-menu>
             </header>
             <nav class="subnav" [class.active]="active">
-                <a href="javascript:void(0);" *ngFor="let tab of tabs" class="item"
-                   [class.active]="tab.active" (click)="setActive(tab)">
-                    {{ tab.title }}
-                    <span [class.tabclose]="tab.active"
-                          (click)="closetab(tab)">X</span>
+                <a href="javascript:void(0);" *ngFor="let form of forms" class="item"
+                   [class.active]="form.tabItem.active" (click)="setActive(form)">
+                    {{ form.tabItem.title }}
+                    <span [class.tabclose]="form.tabItem.active" (click)="closeTab(form)">X</span>
                 </a>
             </nav>
             <div style='clear:both'></div>
             <div class="content-container">
                 <div class="content-area">
-                    <ns-tab *ngFor="let tab of tabs" [tabItem]="tab"></ns-tab>
-                    <ng-template dynamic-load></ng-template>
+                    <ns-tab *ngFor="let form of forms" [formConfig]="form"></ns-tab>
                 </div>
             </div>
         </div>
@@ -46,125 +39,77 @@ export class HomeComponent implements OnInit {
     dynamicComponent: DynamicLoadDirective;
     menus: NsMenu;
     active: boolean;
-    tabs: NavTabItem[];
+    forms: FormConfig[];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private injector: Injector,
-                private menuService: MenuService) {
-        this.tabs = [];
-    }
-
-    setActive(tab: NavTabItem) {
-        this.tabs.forEach((t) => t.active = false);
-        //切换tab页时,记录锚点路由
-        location.hash = tab.url;
-        tab.active = true;
-    }
-
-    closetab(tab: NavTabItem) {
-        //关闭tab页
-        var index = this.tabs.indexOf(tab);
-        if (index > -1) {
-            this.tabs.splice(index, 1);
-        }
-        var activeNum = this.tabs.filter(tab => tab.active).length;
-        if (activeNum == 0) {
-            var number = this.tabs.length - 1;
-            if (number >= 0) {
-                this.tabs[number].active = true;
-                //切换tab页时,记录锚点路由
-                location.hash = this.tabs[number].url;
-            }
-        }
+                private injector: Injector, private menuService: MenuService) {
+        this.forms = [];
     }
 
     ngOnInit(): void {
         this.menus = this.menuService.getMenus();
         //打开页面时,读取hash路由并加载组件
-        this.loadComponentByHash();
-        var self = this;
+        this.loadTabByHash();
+        let self = this;
         //监听浏览器前进/后退事件,读取hash路由并加载组件
         $(window).on('hashchange', function () {
-            self.loadComponentByHash();
+            self.loadTabByHash();
         });
-        var workSheet: WorkSheet = XLSX.utils.json_to_sheet([
-            { S:1, h:2, e:3, e_1:4, t:5, J:6, S_1:7 },
-            { S:2, h:3, e:4, e_1:5, t:6, J:7, S_1:8 }
-        ], {header:["S","h","e","e_1","t","J","S_1"]});
-        console.log(workSheet);
-        var workbook: WorkBook = {
-            Sheets: {
-                'sheet1': workSheet
-            },
-            SheetNames: ['sheet1']
-        };
-        //XLSX.writeFile(workbook, 'out.xlsx');
     }
 
-    loadComponentByHash() {
-        var url = location.hash.substr(1);
-        if (url) {
-            var formConfig: FormConfig = this.menuService.getComponentConfig(url);
-            var component: NsComponent<FormConfig> = new NsComponent(NsFormComponent, formConfig);
-            this.addTab(formConfig.tabItem);
-            this.loadComponent(component);
-        } else {
-            let viewContainerRef = this.dynamicComponent.viewContainerRef;
-            viewContainerRef.clear();
+    addTab(formConfig: FormConfig) {
+        //打开tab页
+        if (this.forms.filter(tab => tab.title == formConfig.tabItem.title).length == 0) {
+            this.forms.push(formConfig);
+        }
+        this.setActive(formConfig);
+    }
+
+    setActive(formConfig: FormConfig) {
+        this.forms.forEach((f) => f.tabItem.active = false);
+        //切换tab页时,记录锚点路由
+        location.hash = formConfig.tabItem.url;
+        formConfig.tabItem.active = true;
+    }
+
+    closeTab(formConfig: FormConfig) {
+        //关闭tab页
+        let index = this.forms.indexOf(formConfig);
+        if (index > -1) {
+            this.forms.splice(index, 1);
+        }
+        let activeNum = this.forms.filter(form => form.tabItem.active).length;
+        if (activeNum == 0) {
+            let number = this.forms.length - 1;
+            if (number >= 0) {
+                this.forms[number].tabItem.active = true;
+                //切换tab页时,记录锚点路由
+                location.hash = this.forms[number].tabItem.url;
+            }
         }
     }
 
-    loadComponentByMenu(menuItem: MenuItem) {
-        var formConfig: FormConfig = this.menuService.getComponentConfig(menuItem.url);
-        var component: NsComponent<FormConfig> = new NsComponent(NsFormComponent, formConfig);
+    loadTabByHash() {
+        let url = location.hash.substr(1);
+        if (url) {
+            let formConfig: FormConfig = this.menuService.getComponentConfig(url);
+            this.addTab(formConfig);
+        }
+    }
+
+    loadTabByMenu(menuItem: MenuItem) {
+        let formConfig: FormConfig = this.menuService.getComponentConfig(menuItem.url);
         //记录锚点路由
         location.hash = menuItem.url;
-        this.addTab(formConfig.tabItem);
-        this.loadComponent(component);
+        this.addTab(formConfig);
     }
-
-    addTab(tabItem: NavTabItem) {
-        //打开tab页
-        if (this.tabs.filter(tab => tab.title == tabItem.title).length == 0) {
-            this.tabs.push(tabItem);
-        }
-        this.tabs.forEach(tab => tab.active = false);
-        var navTabItem = this.tabs.filter(tab => tab.title == tabItem.title)[0];
-        navTabItem.active = true;
-    }
-    /**
-     * 动态创建组件,同时添加动态内容投影示例
-     *
-     * ComponentFactoryResolver  组件工厂解析器,负责创建具体组件对应的组件工厂,通过依赖注入获得
-     *      相当于DefaultListableBeanDefinitionDocumentReader
-     * Injector  依赖注入器,相当于ApplicationContext,通过依赖注入获得
-     * ComponentFactory  组件工厂,每一个组件对应一个组件工厂.相当于FactoryBean
-     * ComponentRef  组件的引用, 可以用viewContainerRef创建,也可以用ComponentFactory创建
-     * ChangeDetectorRef 变更检测器, 每个组件都有自己的变更检测器
-     * result: any[][]  投影元素的dom对象
-     * ViewContainerRef  视图容器的引用, 通过自定义指令获得
-     *
-     * @param nsComponent
-     */
 
     loadComponent(nsComponent: NsComponent<any>) {
-        //创建动态内容投影元素
-        let contentProjectComponent = new NsComponent(ContentProjectDemo);
-        let contentProjectFactory = this.componentFactoryResolver
-            .resolveComponentFactory(contentProjectComponent.component);
-        let crf: ComponentRef<DynamicComponent> = contentProjectFactory.create(this.injector);
-        crf.instance.data = "demo content";
-        (<ContentProjectDemo>crf.instance).cd.detectChanges();
-        let result: any[][] = [[crf.location.nativeElement]];
-
-        //创建动态元素
-        let demoComponent = new NsComponent(DynamicDemo);
-        let demoComponentFactory = this.componentFactoryResolver
-            .resolveComponentFactory(demoComponent.component);
+        let componentFactory = this.componentFactoryResolver.resolveComponentFactory(nsComponent.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        var dynamicComponentComponentRef = viewContainerRef
-            .createComponent(demoComponentFactory, 0, this.injector, result);
-        dynamicComponentComponentRef.instance.data = "demo dynamic content";
+        let componentRef = viewContainerRef.createComponent(componentFactory);
+        (<DynamicComponent>componentRef.instance).data = nsComponent.data;
     }
+
 }

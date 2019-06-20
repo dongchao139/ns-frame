@@ -1,19 +1,22 @@
-import { NgModule } from '@angular/core';
-import { NsMenuComponent, MenuItemComponent } from './components/NsMenuComponent';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {MenuItemComponent, NsMenuComponent} from './components/NsMenuComponent';
+import {CommonModule} from '@angular/common';
 import {NavTabComponent} from './components/NavTabComponent';
+import {DynamicLoadDirective} from "./directives/DynamicLoadDirective";
 
 @NgModule({
-  declarations: [
-    NsMenuComponent,
-    MenuItemComponent,
-    NavTabComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [NsMenuComponent,NavTabComponent],
-  providers: [],
-  entryComponents: [NsMenuComponent]
+    declarations: [
+        NsMenuComponent,
+        MenuItemComponent,
+        DynamicLoadDirective,
+        NavTabComponent
+    ],
+    imports: [
+        CommonModule
+    ],
+    exports: [NsMenuComponent, NavTabComponent, DynamicLoadDirective],
+    providers: [],
+    entryComponents: [NsMenuComponent]
 })
-export class NsMenuModule { }
+export class NsMenuModule {
+}

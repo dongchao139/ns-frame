@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {DynamicComponent} from "../home/NsComponent";
+import {DynamicComponent} from "../../home/NsComponent";
 
 @Component({
     selector: 'dynamic-demo',

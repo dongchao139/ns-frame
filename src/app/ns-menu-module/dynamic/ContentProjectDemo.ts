@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, Input} from "@angular/core";
-import {DynamicComponent} from "../home/NsComponent";
+import {DynamicComponent} from "../../home/NsComponent";
 
 @Component({
     selector: 'content-project-demo',
