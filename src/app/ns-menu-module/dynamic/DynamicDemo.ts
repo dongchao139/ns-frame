@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit, ViewContainerRef} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {DynamicComponent} from "../../home/NsComponent";
 import * as XLSX from "xlsx";
 import {WorkBook, WorkSheet} from "xlsx";
@@ -7,6 +7,7 @@ import {ContentProjectDemo} from "./ContentProjectDemo";
 /**
  * 由viewContainerRef创建的组件, 它的声明周期函数可以被正常调用,也可以正常的变更检测
  * 但无法通过@ContentChildren获取投影进来的组件
+ * 也无法是有@ViewChild
  */
 @Component({
     selector: 'dynamic-demo',
@@ -20,10 +21,6 @@ import {ContentProjectDemo} from "./ContentProjectDemo";
 export class DynamicDemo implements DynamicComponent, OnInit, DoCheck {
     data: any;
     contentChild: ContentProjectDemo;
-
-    constructor(public viewContainerRef: ViewContainerRef) {
-        console.log(viewContainerRef);
-    }
 
     ngOnInit(): void {
         var workSheet: WorkSheet = XLSX.utils.json_to_sheet([
@@ -70,7 +67,4 @@ export class DynamicDemo implements DynamicComponent, OnInit, DoCheck {
         this.contentChild.cd.detectChanges();
     }
 
-    gotEvent(data:any) {
-        console.log("gotEvent: " + data);
-    }
 }
