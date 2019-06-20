@@ -60,8 +60,9 @@ export class NavTabComponent implements OnInit {
             .resolveComponentFactory(demoComponent.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        var dynamicComponentComponentRef = viewContainerRef
-            .createComponent(demoComponentFactory, 0, this.injector, result);
-        dynamicComponentComponentRef.instance.data = "demo dynamic content " + formConfig.action;
+        var dynamicComponentCrf= viewContainerRef.createComponent(demoComponentFactory, 0, this.injector,result);
+        dynamicComponentCrf.instance.data = "demo dynamic content " + formConfig.action;
+        //为外层组件保留内容投影组件的引用, 用于绑定变更检测
+        (<DynamicDemo>dynamicComponentCrf.instance).contentChild = <ContentProjectDemo>crf.instance;
     }
 }
