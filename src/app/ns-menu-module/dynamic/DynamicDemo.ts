@@ -3,6 +3,7 @@ import {DynamicComponent} from "../../home/NsComponent";
 import * as XLSX from "xlsx";
 import {WorkBook, WorkSheet} from "xlsx";
 import {ContentProjectDemo} from "./ContentProjectDemo";
+import {Subject} from "rxjs";
 
 /**
  * 由viewContainerRef创建的组件, 它的声明周期函数可以被正常调用,也可以正常的变更检测
@@ -21,8 +22,15 @@ import {ContentProjectDemo} from "./ContentProjectDemo";
 export class DynamicDemo implements DynamicComponent, OnInit, DoCheck {
     data: any;
     contentChild: ContentProjectDemo;
+    event:Subject<any>;
 
     ngOnInit(): void {
+        if (this.event){
+            this.event.subscribe(value => {
+                console.log("got event: ");
+                console.log(value);
+            });
+        }
         var workSheet: WorkSheet = XLSX.utils.json_to_sheet([
             { S:1, h:2, e:3, e_1:4, t:5, J:6, S_1:7 },
             { S:2, h:3, e:4, e_1:5, t:6, J:7, S_1:8 }

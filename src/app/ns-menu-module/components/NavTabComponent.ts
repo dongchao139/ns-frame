@@ -5,6 +5,7 @@ import {FormConfig} from "../../ns-form-module/FormConfig";
 import {MenuService} from "./MenuService";
 import {ContentProjectDemo} from "../dynamic/ContentProjectDemo";
 import {DynamicDemo} from "../dynamic/DynamicDemo";
+import {Subject} from "rxjs";
 
 @Component({
     selector: 'ns-tab',
@@ -64,5 +65,10 @@ export class NavTabComponent implements OnInit {
         dynamicComponentCrf.instance.data = "demo dynamic content " + formConfig.action;
         //为外层组件保留内容投影组件的引用, 用于绑定变更检测
         (<DynamicDemo>dynamicComponentCrf.instance).contentChild = <ContentProjectDemo>crf.instance;
+
+        //外部组件和内容投影组件之间使用[可观察对象]交互
+        var event:Subject<any> = new Subject();
+        (<DynamicDemo>dynamicComponentCrf.instance).event = event;
+        (<ContentProjectDemo>crf.instance).event = event;
     }
 }
