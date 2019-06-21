@@ -47,13 +47,12 @@ export class NavTabComponent implements OnInit {
      */
     loadComponent(formConfig: FormConfig) {
         //创建动态内容投影元素
-        let contentProjectComponent = new NsComponent(ContentProjectDemo);
-        let contentProjectFactory = this.componentFactoryResolver
-            .resolveComponentFactory(contentProjectComponent.component);
-        let crf: ComponentRef<DynamicComponent> = contentProjectFactory.create(this.injector);
-        crf.instance.data = "demo content " + formConfig.title;
-        (<ContentProjectDemo>crf.instance).cd.detectChanges();
-        let result: any[][] = [[crf.location.nativeElement]];
+        // let contentProjectComponent = new NsComponent(ContentProjectDemo);
+        // let contentProjectFactory = this.componentFactoryResolver
+        //     .resolveComponentFactory(contentProjectComponent.component);
+        // let crf: ComponentRef<DynamicComponent> = contentProjectFactory.create(this.injector);
+        // crf.instance.data = "demo content " + formConfig.title;
+        // let result: any[][] = [[crf.location.nativeElement]];
 
         //创建动态元素
         let demoComponent = new NsComponent(DynamicDemo);
@@ -61,14 +60,14 @@ export class NavTabComponent implements OnInit {
             .resolveComponentFactory(demoComponent.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        var dynamicComponentCrf= viewContainerRef.createComponent(demoComponentFactory, 0, this.injector,result);
+        var dynamicComponentCrf= viewContainerRef.createComponent(demoComponentFactory, 0, this.injector);
         dynamicComponentCrf.instance.data = "demo dynamic content " + formConfig.action;
         //为外层组件保留内容投影组件的引用, 用于绑定变更检测
-        (<DynamicDemo>dynamicComponentCrf.instance).contentChild = <ContentProjectDemo>crf.instance;
+        //(<DynamicDemo>dynamicComponentCrf.instance).contentChild = <ContentProjectDemo>crf.instance;
 
         //外部组件和内容投影组件之间使用[可观察对象]交互
-        var event:Subject<any> = new Subject();
-        (<DynamicDemo>dynamicComponentCrf.instance).event = event;
-        (<ContentProjectDemo>crf.instance).event = event;
+        //var event:Subject<any> = new Subject();
+        //(<DynamicDemo>dynamicComponentCrf.instance).event = event;
+        //(<ContentProjectDemo>crf.instance).event = event;
     }
 }
