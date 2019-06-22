@@ -3,7 +3,7 @@ import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDire
 import {MenuService} from './MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import * as $ from "jquery";
-import {NsForm} from "../ns-form-module/FormConfig";
+import {NsComponent} from "./NsComponent";
 
 @Component({
     selector: 'home',
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     dynamicComponent: DynamicLoadDirective;
     menus: NsMenu;
     active: boolean;
-    forms: NsForm[];
+    forms: NsComponent<any>[];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector, private menuService: MenuService) {
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    openTab(nsForm: NsForm) {
+    openTab(nsForm: NsComponent<any>) {
         //打开tab页
         if (this.forms.filter(f => f.data.id == nsForm.data.id).length == 0) {
             this.forms.push(nsForm);
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
         this.setActive(nsForm);
     }
 
-    setActive(nsForm: NsForm) {
+    setActive(nsForm: NsComponent<any>) {
         this.forms.forEach(f => f.tabItem.active = false);
         //切换tab页时,记录锚点路由
         location.hash = nsForm.tabItem.url;
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
         filterElement.tabItem.active = true;
     }
 
-    closeTab(nsForm: NsForm) {
+    closeTab(nsForm: NsComponent<any>) {
         //关闭tab页
         let index = this.forms.indexOf(nsForm);
         if (index > -1) {
@@ -93,13 +93,13 @@ export class HomeComponent implements OnInit {
 
     loadTabByHash() {
         if (location.hash && location.hash != '#undefined') {
-            let nsForm: NsForm = this.menuService.getComponentConfig(location.hash.substr(1));
+            let nsForm: NsComponent<any> = this.menuService.getComponentConfig(location.hash.substr(1));
             this.openTab(nsForm);
         }
     }
 
     loadTabByMenu(menuItem: MenuItem) {
-        let nsForm: NsForm = this.menuService.getComponentConfig(menuItem.url);
+        let nsForm: NsComponent<any> = this.menuService.getComponentConfig(menuItem.url);
         //记录锚点路由
         location.hash = menuItem.url;
     }
