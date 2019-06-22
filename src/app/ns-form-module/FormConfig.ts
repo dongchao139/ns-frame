@@ -1,12 +1,10 @@
 import {Type} from '@angular/core';
 import {NavTabItem} from '../ns-menu-module/NsMenuConfig';
+import {NsComponent} from "../home/NsComponent";
+import {NsFormComponent} from "./components/NsFormComponent";
 
 export enum HttpMethod {
     GET, POST, PUT, DELETE
-}
-
-export enum FormSize {
-    SMALL, MIDDLE, LARGE
 }
 
 export enum FormItemType {
@@ -16,7 +14,6 @@ export enum FormItemType {
 export interface FormConfig {
     id: string;
     title: string;
-    size: FormSize;
     method?: HttpMethod;
     action?: string;
 }
@@ -45,21 +42,22 @@ export interface SelectOption<T> {
     value: string;
 }
 
-export class NsForm {
+export class NsForm extends NsComponent<FormConfig> {
     /**
-     *
      * @param component 要加载的组件类
      * @param data 当前组件的配置
      * @param tabItem tab页的相关属性
      * @param items 当前组件的子组件列表
      */
-    constructor(public component: Type<any>, public data: FormConfig,
+    constructor(public component: Type<NsFormComponent>, public data: FormConfig,
                 public tabItem: NavTabItem, public items: FormItem[]) {
+        super(component, data, tabItem, items);
     }
 }
 
-export class FormItem {
+export class FormItem extends NsComponent<FormItemConfig> {
     constructor(public component: Type<any>, public data: FormItemConfig) {
+        super(component, data);
     }
 }
 

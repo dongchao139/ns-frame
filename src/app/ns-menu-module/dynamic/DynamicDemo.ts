@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, Injector, ViewChild} from '@angular/core';
 import {DynamicComponent, NsComponent} from '../../home/NsComponent';
 import {ContentProjectDemo} from "./ContentProjectDemo";
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
@@ -16,16 +16,13 @@ import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
         </p>
     `
 })
-export class DynamicDemo implements DynamicComponent, OnInit {
+export class DynamicDemo implements DynamicComponent {
     data: any;
     @ViewChild(DynamicLoadDirective, {static: true})
     dynamicComponent: DynamicLoadDirective;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector) { }
-
-    ngOnInit(): void {
-    }
 
     doClick() {
         let demoComponent = new NsComponent(ContentProjectDemo);

@@ -1,6 +1,7 @@
 import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
 import {NsForm} from "../../ns-form-module/FormConfig";
+import {NsComponent} from "../../home/NsComponent";
 
 @Component({
     selector: 'ns-tab',
@@ -35,13 +36,13 @@ export class NavTabComponent implements OnInit {
      *
      * @param nsForm
      */
-    loadComponent(nsForm: NsForm) {
+    loadComponent(nsForm: NsComponent<any>) {
         //创建动态元素
         let componentFactory = this.componentFactoryResolver
             .resolveComponentFactory(nsForm.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        var dynamicComponentCrf= viewContainerRef.createComponent(componentFactory, 0, this.injector);
-        dynamicComponentCrf.instance.data = "demo dynamic content " + nsForm.data.action;
+        var componentRef= viewContainerRef.createComponent(componentFactory, 0, this.injector);
+        componentRef.instance.data = nsForm.data;
     }
 }
