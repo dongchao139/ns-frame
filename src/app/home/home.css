@@ -51,6 +51,7 @@
     float: right;
     margin-left: 0.5rem;
     font-family: serif;
+    font-size: 10px;
 }
 
 .subnav > a:hover > span {

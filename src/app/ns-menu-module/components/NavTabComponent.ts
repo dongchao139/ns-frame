@@ -1,20 +1,18 @@
 import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
-import {NsComponent} from '../../home/NsComponent';
-import {FormConfig} from "../../ns-form-module/FormConfig";
-import {DynamicDemo} from "../dynamic/DynamicDemo";
+import {NsForm} from "../../ns-form-module/FormConfig";
 
 @Component({
     selector: 'ns-tab',
     template: `
-        <p [hidden]="!formConfig.tabItem.active">
+        <p [hidden]="!nsForm.tabItem.active">
             <ng-template dynamic-load></ng-template>
         </p>
     `
 })
 export class NavTabComponent implements OnInit {
     @Input()
-    formConfig: FormConfig;
+    nsForm: NsForm;
     @ViewChild(DynamicLoadDirective, {static: true})
     dynamicComponent: DynamicLoadDirective;
 
@@ -23,7 +21,7 @@ export class NavTabComponent implements OnInit {
 }
 
     ngOnInit(): void {
-        this.loadComponent(this.formConfig);
+        this.loadComponent(this.nsForm);
     }
 
     /**
@@ -35,16 +33,15 @@ export class NavTabComponent implements OnInit {
      * ViewContainerRef  视图容器的引用, 通过自定义指令获得
      * ComponentRef  组件的引用
      *
-     * @param formConfig
+     * @param nsForm
      */
-    loadComponent(formConfig: FormConfig) {
+    loadComponent(nsForm: NsForm) {
         //创建动态元素
-        let demoComponent = new NsComponent(DynamicDemo);
-        let demoComponentFactory = this.componentFactoryResolver
-            .resolveComponentFactory(demoComponent.component);
+        let componentFactory = this.componentFactoryResolver
+            .resolveComponentFactory(nsForm.component);
         let viewContainerRef = this.dynamicComponent.viewContainerRef;
         viewContainerRef.clear();
-        var dynamicComponentCrf= viewContainerRef.createComponent(demoComponentFactory, 0, this.injector);
-        dynamicComponentCrf.instance.data = "demo dynamic content " + formConfig.action;
+        var dynamicComponentCrf= viewContainerRef.createComponent(componentFactory, 0, this.injector);
+        dynamicComponentCrf.instance.data = "demo dynamic content " + nsForm.data.action;
     }
 }

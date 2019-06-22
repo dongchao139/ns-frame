@@ -2,8 +2,8 @@ import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '
 import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
 import {MenuService} from './MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
-import {FormConfig} from '../ns-form-module/FormConfig';
 import * as $ from "jquery";
+import {NsForm} from "../ns-form-module/FormConfig";
 
 @Component({
     selector: 'home',
@@ -16,16 +16,16 @@ import * as $ from "jquery";
                 <ns-menu [menuList]='menus.data' (clickMenu)='loadTabByMenu($event)'></ns-menu>
             </header>
             <nav class="subnav" [class.active]="active">
-                <a href="javascript:void(0);" *ngFor="let form of forms" class="item"
-                   [class.active]="form.tabItem.active" (click)="setActive(form)">
-                    {{ form.tabItem.title }}
-                    <span [class.tabclose]="form.tabItem.active" (click)="closeTab(form)">\u2716</span>
+                <a href="javascript:void(0);" *ngFor="let nsForm of forms" class="item"
+                   [class.active]="nsForm.tabItem.active" (click)="setActive(nsForm)">
+                    {{ nsForm.tabItem.title }}
+                    <span [class.tabclose]="nsForm.tabItem.active" (click)="closeTab(nsForm)">\u2716</span>
                 </a>
             </nav>
             <div style='clear:both'></div>
             <div class="content-container">
                 <div class="content-area">
-                    <ns-tab *ngFor="let form of forms" [formConfig]="form"></ns-tab>
+                    <ns-tab *ngFor="let nsForm of forms" [nsForm]="nsForm"></ns-tab>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     dynamicComponent: DynamicLoadDirective;
     menus: NsMenu;
     active: boolean;
-    forms: FormConfig[];
+    forms: NsForm[];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector, private menuService: MenuService) {
@@ -56,25 +56,25 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    openTab(formConfig: FormConfig) {
+    openTab(nsForm: NsForm) {
         //打开tab页
-        if (this.forms.filter(form => form.id == formConfig.id).length == 0) {
-            this.forms.push(formConfig);
+        if (this.forms.filter(f => f.data.id == nsForm.data.id).length == 0) {
+            this.forms.push(nsForm);
         }
-        this.setActive(formConfig);
+        this.setActive(nsForm);
     }
 
-    setActive(formConfig: FormConfig) {
-        this.forms.forEach((f) => f.tabItem.active = false);
+    setActive(nsForm: NsForm) {
+        this.forms.forEach(f => f.tabItem.active = false);
         //切换tab页时,记录锚点路由
-        location.hash = formConfig.tabItem.url;
-        var filterElement = this.forms.filter(f => f.id == formConfig.id)[0];
+        location.hash = nsForm.tabItem.url;
+        var filterElement = this.forms.filter(f => f.data.id == nsForm.data.id)[0];
         filterElement.tabItem.active = true;
     }
 
-    closeTab(formConfig: FormConfig) {
+    closeTab(nsForm: NsForm) {
         //关闭tab页
-        let index = this.forms.indexOf(formConfig);
+        let index = this.forms.indexOf(nsForm);
         if (index > -1) {
             this.forms.splice(index, 1);
         }
@@ -85,23 +85,23 @@ export class HomeComponent implements OnInit {
                 this.forms[number].tabItem.active = true;
                 //切换tab页时,记录锚点路由
                 location.hash = this.forms[number].tabItem.url;
+            } else {
+                location.hash = '';
             }
         }
     }
 
     loadTabByHash() {
-        let url = location.hash.substr(1);
-        if (url) {
-            let formConfig: FormConfig = this.menuService.getComponentConfig(url);
-            this.openTab(formConfig);
+        if (location.hash && location.hash != '#undefined') {
+            let nsForm: NsForm = this.menuService.getComponentConfig(location.hash.substr(1));
+            this.openTab(nsForm);
         }
     }
 
     loadTabByMenu(menuItem: MenuItem) {
-        let formConfig: FormConfig = this.menuService.getComponentConfig(menuItem.url);
+        let nsForm: NsForm = this.menuService.getComponentConfig(menuItem.url);
         //记录锚点路由
         location.hash = menuItem.url;
-        this.openTab(formConfig);
     }
 
 }

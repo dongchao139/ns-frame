@@ -29,7 +29,6 @@ export class NsMenu {
 
 export class NavTabItem {
     title: string;
-    content: string;
-    url?: string;
+    url: string;
     active?: boolean;
 }

@@ -25,7 +25,6 @@ export class DynamicDemo implements DynamicComponent, OnInit {
                 private injector: Injector) { }
 
     ngOnInit(): void {
-        console.log(this.dynamicComponent);
     }
 
     doClick() {

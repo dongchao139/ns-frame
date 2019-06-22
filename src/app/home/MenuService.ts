@@ -1,7 +1,8 @@
-import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
+import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
-import {FormConfig, FormSize, HttpMethod} from "../ns-form-module/FormConfig";
+import {FormConfig, FormSize, NsForm} from "../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
+import {DynamicDemo} from "../ns-menu-module/dynamic/DynamicDemo";
 
 @Injectable()
 export class MenuService {
@@ -44,20 +45,17 @@ export class MenuService {
         return new NsMenu(NsMenuComponent, menus);
     }
 
-    getComponentConfig(url: string): FormConfig {
-        return {
+    getComponentConfig(url: string): NsForm {
+        var data: FormConfig = {
             id: 'form-' + url,
-            title: 'form demo ' + url,
+            title: url,
             size: FormSize.MIDDLE,
-            method: HttpMethod.GET,
-            action: url,
-            itemConfigs: [],
-            tabItem: {
-                title: url.substr(url.lastIndexOf('/')),
-                url: url,
-                content: 'demo content' + url,
-                active: false
-            }
+            action: url.substr(url.lastIndexOf('/'))
         };
+        var navTabItem: NavTabItem = {
+            title: url.substr(url.lastIndexOf('/')),
+            url: url
+        };
+        return new NsForm(DynamicDemo, data, navTabItem, []);
     }
 }
