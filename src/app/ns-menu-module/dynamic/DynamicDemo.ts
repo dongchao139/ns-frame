@@ -1,7 +1,5 @@
 import {Component, ComponentFactoryResolver, DoCheck, Injector, OnInit, ViewChild} from '@angular/core';
 import {DynamicComponent, NsComponent} from '../../home/NsComponent';
-import * as XLSX from "xlsx";
-import {WorkBook, WorkSheet} from "xlsx";
 import {ContentProjectDemo} from "./ContentProjectDemo";
 import {Subject} from "rxjs";
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
@@ -37,43 +35,6 @@ export class DynamicDemo implements DynamicComponent, OnInit, DoCheck {
                 console.log(value);
             });
         }
-        var workSheet: WorkSheet = XLSX.utils.json_to_sheet([
-            { S:1, h:2, e:3, e_1:4, t:5, J:6, S_1:7 },
-            { S:2, h:3, e:4, e_1:5, t:6, J:7, S_1:8 }
-        ], {header:["S","h","e","e_1","t","J","S_1"]});
-        var workbook: WorkBook = {
-            Sheets: {
-                'sheet1': workSheet
-            },
-            SheetNames: ['sheet1']
-        };
-
-        var wb: WorkBook = {
-            Sheets: {
-                'sheet1': {
-                    'A1':{
-                        t: 'n',
-                        v: 10
-                    },
-                    'A2':{
-                        t: 'n',
-                        v: 20
-                    },
-                    'B1':{
-                        t: 'n',
-                        v: 30
-                    },
-                    'B2':{
-                        t: 'n',
-                        v: 40
-                    }
-                },
-                'sheet2': {},
-                'sheet3': {}
-            },
-            SheetNames: ['sheet1','sheet2','sheet3']
-        };
-        //XLSX.writeFile(workbook, 'out.xlsx');
     }
 
     ngDoCheck(): void {

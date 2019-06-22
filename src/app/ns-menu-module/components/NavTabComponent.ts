@@ -1,11 +1,9 @@
-import {Component, ComponentFactoryResolver, ComponentRef, Injector, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
-import {DynamicComponent, NsComponent} from '../../home/NsComponent';
+import {NsComponent} from '../../home/NsComponent';
 import {FormConfig} from "../../ns-form-module/FormConfig";
 import {MenuService} from "./MenuService";
-import {ContentProjectDemo} from "../dynamic/ContentProjectDemo";
 import {DynamicDemo} from "../dynamic/DynamicDemo";
-import {Subject} from "rxjs";
 
 @Component({
     selector: 'ns-tab',
@@ -32,28 +30,17 @@ export class NavTabComponent implements OnInit {
     }
 
     /**
-     * 动态创建组件,同时添加动态内容投影示例
+     * 动态创建组件示例
      *
      * ComponentFactoryResolver  组件工厂解析器,负责创建具体组件对应的组件工厂,通过依赖注入获得
-     *      相当于DefaultListableBeanDefinitionDocumentReader
      * Injector  依赖注入器,相当于ApplicationContext,通过依赖注入获得
-     * ComponentFactory  组件工厂,每一个组件对应一个组件工厂.相当于FactoryBean
-     * ComponentRef  组件的引用, 可以用viewContainerRef创建,也可以用ComponentFactory创建
-     * ChangeDetectorRef 变更检测器, 每个组件都有自己的变更检测器
-     * result: any[][]  投影元素的dom对象
+     * ComponentFactory  组件工厂,每一个组件对应一个组件工厂
      * ViewContainerRef  视图容器的引用, 通过自定义指令获得
+     * ComponentRef  组件的引用
      *
      * @param formConfig
      */
     loadComponent(formConfig: FormConfig) {
-        //创建动态内容投影元素
-        // let contentProjectComponent = new NsComponent(ContentProjectDemo);
-        // let contentProjectFactory = this.componentFactoryResolver
-        //     .resolveComponentFactory(contentProjectComponent.component);
-        // let crf: ComponentRef<DynamicComponent> = contentProjectFactory.create(this.injector);
-        // crf.instance.data = "demo content " + formConfig.title;
-        // let result: any[][] = [[crf.location.nativeElement]];
-
         //创建动态元素
         let demoComponent = new NsComponent(DynamicDemo);
         let demoComponentFactory = this.componentFactoryResolver
@@ -62,12 +49,5 @@ export class NavTabComponent implements OnInit {
         viewContainerRef.clear();
         var dynamicComponentCrf= viewContainerRef.createComponent(demoComponentFactory, 0, this.injector);
         dynamicComponentCrf.instance.data = "demo dynamic content " + formConfig.action;
-        //为外层组件保留内容投影组件的引用, 用于绑定变更检测
-        //(<DynamicDemo>dynamicComponentCrf.instance).contentChild = <ContentProjectDemo>crf.instance;
-
-        //外部组件和内容投影组件之间使用[可观察对象]交互
-        //var event:Subject<any> = new Subject();
-        //(<DynamicDemo>dynamicComponentCrf.instance).event = event;
-        //(<ContentProjectDemo>crf.instance).event = event;
     }
 }

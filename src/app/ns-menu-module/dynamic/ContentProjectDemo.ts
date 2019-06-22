@@ -1,6 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DynamicComponent} from "../../home/NsComponent";
-import {Subject} from "rxjs";
 
 /**
  * 动态组件可以再创建动态组件
@@ -17,22 +16,12 @@ import {Subject} from "rxjs";
 })
 export class ContentProjectDemo implements DynamicComponent, OnInit{
     data: any;
-    event:Subject<any>;
-
-    constructor(public cd:ChangeDetectorRef) {
-
-    }
 
     ngOnInit(): void {
         console.log("ngOnInit invoked");
-
     }
 
     doChange() {
         this.data = '';
-        if (this.event) {
-            console.log("send message");
-            this.event.next("abc");
-        }
     }
 }
