@@ -1,6 +1,5 @@
 import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
-import {NsForm} from "../../ns-form-module/FormConfig";
 import {NsComponent} from "../../home/NsComponent";
 
 @Component({
@@ -13,7 +12,7 @@ import {NsComponent} from "../../home/NsComponent";
 })
 export class NavTabComponent implements OnInit {
     @Input()
-    nsForm: NsForm;
+    nsForm: NsComponent<any>;
     @ViewChild(DynamicLoadDirective, {static: true})
     dynamicComponent: DynamicLoadDirective;
 

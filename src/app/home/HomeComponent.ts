@@ -1,4 +1,12 @@
-import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
+import {
+    Component,
+    ComponentFactoryResolver,
+    Injector,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
 import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
 import {MenuService} from './MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
@@ -10,7 +18,7 @@ import {NsComponent} from "./NsComponent";
     template: `
         <div class="main-container">
             <header class="header-6">
-
+                {{getContent()}}
             </header>
             <header class="header-6 sub-header">
                 <ns-menu [menuList]='menus.data' (clickMenu)='loadTabByMenu($event)'></ns-menu>
@@ -32,7 +40,7 @@ import {NsComponent} from "./NsComponent";
     `,
     styleUrls: ['./home.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnChanges {
 
     @ViewChild(DynamicLoadDirective, {static: true})
     dynamicComponent: DynamicLoadDirective;
@@ -43,6 +51,14 @@ export class HomeComponent implements OnInit {
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector, private menuService: MenuService) {
         this.forms = [];
+    }
+
+    getContent():string {
+        return 'demo string';
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+
     }
 
     ngOnInit(): void {
