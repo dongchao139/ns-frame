@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, Injector, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
-import {MenuService} from '../ns-menu-module/components/MenuService';
+import {MenuService} from './MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {FormConfig} from '../ns-form-module/FormConfig';
 import * as $ from "jquery";
@@ -19,7 +19,7 @@ import * as $ from "jquery";
                 <a href="javascript:void(0);" *ngFor="let form of forms" class="item"
                    [class.active]="form.tabItem.active" (click)="setActive(form)">
                     {{ form.tabItem.title }}
-                    <span [class.tabclose]="form.tabItem.active" (click)="closeTab(form)">X</span>
+                    <span [class.tabclose]="form.tabItem.active" (click)="closeTab(form)">\u2716</span>
                 </a>
             </nav>
             <div style='clear:both'></div>

@@ -2,7 +2,6 @@ import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild}
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
 import {NsComponent} from '../../home/NsComponent';
 import {FormConfig} from "../../ns-form-module/FormConfig";
-import {MenuService} from "./MenuService";
 import {DynamicDemo} from "../dynamic/DynamicDemo";
 
 @Component({
@@ -20,8 +19,8 @@ export class NavTabComponent implements OnInit {
     dynamicComponent: DynamicLoadDirective;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private injector: Injector, private menuService: MenuService) {
-    }
+                private injector: Injector) {
+}
 
     ngOnInit(): void {
         this.loadComponent(this.formConfig);

@@ -1,6 +1,6 @@
-import {MenuItem, NsMenu} from '../NsMenuConfig';
-import {NsMenuComponent} from "./NsMenuComponent";
-import {FormConfig, FormSize, HttpMethod} from "../../ns-form-module/FormConfig";
+import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
+import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
+import {FormConfig, FormSize, HttpMethod} from "../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
 
 @Injectable()

@@ -4,7 +4,7 @@ import {LoginComponent} from './LoginComponent';
 import {HomeComponent} from './home/HomeComponent';
 import {NsForm} from './ns-form-module/ns-form.module';
 import {NsMenuModule} from './ns-menu-module/ns-menu.module';
-import {MenuService} from './ns-menu-module/components/MenuService';
+import {MenuService} from './home/MenuService';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {ClarityModule} from '@clr/angular';
