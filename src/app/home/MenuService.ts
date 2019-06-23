@@ -3,7 +3,7 @@ import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
 import {FormConfig} from "../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
 import {NsComponent} from "./NsComponent";
-import {DynamicDemo} from "../ns-menu-module/dynamic/DynamicDemo";
+import {NsFormComponent} from "../ns-form-module/components/NsFormComponent";
 
 @Injectable()
 export class MenuService {
@@ -56,6 +56,6 @@ export class MenuService {
             title: url.substr(url.lastIndexOf('/')),
             url: url
         };
-        return new NsComponent(DynamicDemo, data, navTabItem, []);
+        return new NsComponent(NsFormComponent, data, navTabItem, []);
     }
 }

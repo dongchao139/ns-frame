@@ -18,7 +18,7 @@ import {NsComponent} from "./NsComponent";
     template: `
         <div class="main-container">
             <header class="header-6">
-                {{getContent()}}
+                
             </header>
             <header class="header-6 sub-header">
                 <ns-menu [menuList]='menus.data' (clickMenu)='loadTabByMenu($event)'></ns-menu>
@@ -51,10 +51,6 @@ export class HomeComponent implements OnInit, OnChanges {
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector, private menuService: MenuService) {
         this.forms = [];
-    }
-
-    getContent():string {
-        return 'demo string';
     }
 
     ngOnChanges(changes: SimpleChanges): void {

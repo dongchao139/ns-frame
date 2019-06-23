@@ -4,6 +4,7 @@ import {NsSelectComponent} from './components/NsSelectComponent';
 import {FormItemDirective} from './directives/FormItemDirective';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -11,10 +12,12 @@ import {HttpClientModule} from '@angular/common/http';
     NsSelectComponent,
     FormItemDirective
   ],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-  ],
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
   exports: [NsFormComponent],
   providers: [],
   entryComponents:[NsSelectComponent,NsFormComponent]
