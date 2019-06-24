@@ -1,7 +1,7 @@
 import {FormConfig} from "../FormConfig";
 import {DynamicComponent} from "../../home/NsComponent";
 import {Component, OnInit,} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'ns-form',
@@ -14,8 +14,19 @@ import {FormBuilder, FormGroup} from "@angular/forms";
     </form>-->
     <form [formGroup]="myForm">
         <label for="skuInput" >SKU</label>
-        <input type='text' id="skuInput" name="sku" placeholder='SKU' [formControl]="myForm.controls['sku']"/>
+        <input type='text' id="skuInput" name="sku" [class.error]="sku.invalid" 
+               placeholder='SKU' [formControl]="myForm.controls['sku']"/>
+        <div class="err-msg" *ngIf="sku.invalid">Sku is invalid</div>
+        <div class="err-msg" *ngIf="sku.hasError('required')">SKU is required</div>
+        <div class="err-msg" *ngIf="sku.hasError('invalidSku')">SKU must begin with 123</div>
+        <div>
+            {{productName}}
+        </div>
+        <input type='text' id="productName" name="productName" placeholder='productName'
+               [class.error]="myForm.controls['productName'].invalid"
+               [formControl]="myForm.controls['productName']" [(ngModel)]="productName"/>
         <button type='button' (click)="onSubmit(myForm.value)">Submit</button>
+        <div class="err-msg" *ngIf="myForm.invalid">Form is invalid</div>
     </form>
     `,
     styleUrls:[`../ns-form.css`]
@@ -23,10 +34,18 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class NsFormComponent implements OnInit, DynamicComponent {
     data: FormConfig;
     myForm: FormGroup;
+    sku: AbstractControl;
+    productName: string;
+
     constructor(fb: FormBuilder) {
         this.myForm = fb.group({
-            'sku':['ABC123']
-        })
+            'sku':['123ABC',Validators.compose([Validators.required,this.skuValidator])],
+            'productName':['',Validators.required]
+        });
+        this.sku = this.myForm.controls['sku'];
+        this.sku.valueChanges.subscribe((form:any)=> {
+            console.log('sku changed to: ',form);
+        });
     }
     ngOnInit(): void {
 
@@ -34,5 +53,11 @@ export class NsFormComponent implements OnInit, DynamicComponent {
 
     onSubmit(value: any) {
         console.log(value);
+    }
+
+    skuValidator(fc:FormControl): {[s:string]:boolean} {
+        if (!fc.value.match(/^123/)) {
+            return {invalidSku:true}
+        }
     }
 }
