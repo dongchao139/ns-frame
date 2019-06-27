@@ -19,9 +19,6 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '
         <div class="err-msg" *ngIf="sku.invalid">Sku is invalid</div>
         <div class="err-msg" *ngIf="sku.hasError('required')">SKU is required</div>
         <div class="err-msg" *ngIf="sku.hasError('invalidSku')">SKU must begin with 123</div>
-        <div>
-            {{productName}}
-        </div>
         <input type='text' id="productName" name="productName" placeholder='productName'
                [class.error]="myForm.controls['productName'].invalid"
                [formControl]="myForm.controls['productName']" [(ngModel)]="productName"/>
