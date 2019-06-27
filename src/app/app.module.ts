@@ -11,6 +11,7 @@ import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DynamicDemo} from "./ns-menu-module/dynamic/DynamicDemo";
 import {ContentProjectDemo} from "./ns-menu-module/dynamic/ContentProjectDemo";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import {ContentProjectDemo} from "./ns-menu-module/dynamic/ContentProjectDemo";
         AppRoutingModule,
         NsFormModule,
         NsMenuModule,
+        HttpClientModule,
         ClarityModule,
         BrowserAnimationsModule
     ],
