@@ -1,6 +1,6 @@
 import {FormConfig} from "../FormConfig";
 import {DynamicComponent} from "../../home/NsComponent";
-import {Component, OnInit,} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild,} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -12,7 +12,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '
         <input type='text' id="skuInput" name="sku" placeholder='SKU' ngModel/>
         <button type='button' (click)="onSubmit(f.value)">Submit</button>
     </form>-->
-    <form [formGroup]="myForm">
+    <form [formGroup]="myForm" #formElement>
         <label for="skuInput" >SKU</label>
         <input type='text' id="skuInput" name="sku" [class.error]="sku.invalid" 
                placeholder='SKU' [formControl]="myForm.controls['sku']"/>
@@ -34,6 +34,12 @@ export class NsFormComponent implements OnInit, DynamicComponent {
     sku: AbstractControl;
     productName: string;
 
+    /**
+     * 通过模板变量和ViewChild获取dom对象
+     */
+    @ViewChild("formElement",{static:false})
+    formElement:ElementRef;
+
     constructor(fb: FormBuilder) {
         this.myForm = fb.group({
             'sku':['123ABC',Validators.compose([Validators.required,this.skuValidator])],
@@ -50,18 +56,7 @@ export class NsFormComponent implements OnInit, DynamicComponent {
 
     onSubmit(value: any) {
         console.log(value);
-
-        //模拟CSRF
-        /*var form = document.createElement('form');
-        form.action = 'http://crm.netstar-soft.com/nsEngine/waitingList/details';
-        form.method = 'POST';
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.value = 'csrf攻击啦！';
-        input.id = 'title';
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();*/
+        console.log(this.formElement);
     }
 
     skuValidator(fc:FormControl): {[s:string]:boolean} {
