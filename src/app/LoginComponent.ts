@@ -17,13 +17,13 @@ import { Router } from "@angular/router";
                             <select class="clr-select ng-valid ng-touched ng-dirty" name="type" [(ngModel)]="form.type">
                                 <option value="local">Local Users</option>
                                 <option value="admin">Administrator</option>
-                            </select>                            
+                            </select>
                         </div>
                     </div>
                     <div class="clr-control-container clr-form-control">
                         <div class="clr-input-wrapper">
                             <div class="clr-input-group">
-                                <input type="text" name="username" class="clr-input ng-pristine ng-valid ng-touched" 
+                                <input type="text" name="username" class="clr-input ng-pristine ng-valid ng-touched"
                                        placeholder="Username" [(ngModel)]="form.username"/>
                             </div>
                         </div>
@@ -31,7 +31,7 @@ import { Router } from "@angular/router";
                     <div class="clr-control-container clr-form-control">
                         <div class="clr-input-wrapper">
                             <div class="clr-input-group">
-                                <input type="password" name="password" class="clr-input ng-pristine ng-valid ng-touched"  
+                                <input type="password" name="password" class="clr-input ng-pristine ng-valid ng-touched"
                                        placeholder="Password" [(ngModel)]="form.password"/>
                             </div>
                         </div>
@@ -45,7 +45,7 @@ import { Router } from "@angular/router";
             </form>
         </div>
     `,
-    styles:[`
+    styles:[`        
         .login-wrapper, .login-wrapper .login {
             display: block;
         }
@@ -54,7 +54,7 @@ import { Router } from "@angular/router";
             background-size: 100%;
             background-position: 0;
             background-repeat: no-repeat;
-            height: 960px;
+            height: 100%;
             min-width: 890px;
         }
         .login-wrapper .login {
@@ -64,11 +64,11 @@ import { Router } from "@angular/router";
             flex-direction: column;
             justify-content: center;
             padding: 1rem 2.5rem;
-            min-height: 1vh;
+            min-height: 24rem;
             width: 21rem;
-            height: 26rem;
-            top: 5rem;
-            right: 10rem;
+            height: 60%;
+            top: 8%;
+            right: 15%;
         }
     `]
 })
