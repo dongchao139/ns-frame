@@ -8,8 +8,7 @@ import { Router } from "@angular/router";
             <form class="login">
                 <section class="title">
                     <h3 class="welcome">Welcome to</h3>
-                    Company Product Name
-                    <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+                    NetStar Soft Company
                 </section>
                 <div class="login-group">
                     <div class="clr-control-container clr-form-control">
@@ -40,7 +39,6 @@ import { Router } from "@angular/router";
                         Invalid user name or password
                     </div>
                     <button type="button" (click)="login()" class="btn btn-primary">NEXT</button>
-                    <a href="javascript:void(0);" class="signup">Sign up for a Company ID</a>
                 </div>
             </form>
         </div>
@@ -61,14 +59,21 @@ import { Router } from "@angular/router";
             background: #fafafa;
             float: right;
             position: relative;
-            flex-direction: column;
-            justify-content: center;
             padding: 1rem 2.5rem;
-            min-height: 24rem;
-            width: 21rem;
-            height: 60%;
-            top: 10%;
+            min-height: 21.5rem;
+            width: 18.5rem;
+            height: 50%;
+            top: 15%;
             right: 15%;
+        }
+
+        .login-wrapper .login .title {
+            line-height: 1.5rem;
+            font-size: 1rem;
+        }
+
+        h3, h4 {
+            font-size: 0.75rem;
         }
     `]
 })
