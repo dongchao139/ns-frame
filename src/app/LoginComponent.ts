@@ -1,11 +1,9 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'login',
     template: `
-        <!-- TODO 使用自己的组件和指令-->
         <div class="login-wrapper">
             <form class="login">
                 <section class="title">
@@ -14,19 +12,31 @@ import {FormBuilder, FormGroup} from '@angular/forms';
                     <h5 class="hint">Use your Company ID to sign in or create one now</h5>
                 </section>
                 <div class="login-group">
-                    <clr-select-container>
-                        <select clrSelect name="type" [(ngModel)]="form.type">
-                            <option value="local">Local Users</option>
-                            <option value="admin">Administrator</option>
-                        </select>
-                    </clr-select-container>
-                    <clr-input-container>
-                        <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="form.username"/>
-                    </clr-input-container>
-                    <clr-password-container>
-                        <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="form.password"/>
-                    </clr-password-container>
-                    <div class="error active" hidden>
+                    <div class="clr-control-container clr-form-control">
+                        <div class="clr-select-wrapper">
+                            <select class="clr-select ng-valid ng-touched ng-dirty" name="type" [(ngModel)]="form.type">
+                                <option value="local">Local Users</option>
+                                <option value="admin">Administrator</option>
+                            </select>                            
+                        </div>
+                    </div>
+                    <div class="clr-control-container clr-form-control">
+                        <div class="clr-input-wrapper">
+                            <div class="clr-input-group">
+                                <input type="text" name="username" class="clr-input ng-pristine ng-valid ng-touched" 
+                                       placeholder="Username" [(ngModel)]="form.username"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr-control-container clr-form-control">
+                        <div class="clr-input-wrapper">
+                            <div class="clr-input-group">
+                                <input type="password" name="password" class="clr-input ng-pristine ng-valid ng-touched"  
+                                       placeholder="Password" [(ngModel)]="form.password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error active">
                         Invalid user name or password
                     </div>
                     <button type="submit" class="btn btn-primary">NEXT</button>
@@ -42,7 +52,7 @@ export class LoginComponent {
     constructor(public router: Router) {
 
     }
-    
+
     public login() {
         this.router.navigate(['home'])
     }
