@@ -39,7 +39,7 @@ import { Router } from "@angular/router";
                     <div class="error active">
                         Invalid user name or password
                     </div>
-                    <button type="submit" class="btn btn-primary">NEXT</button>
+                    <button type="button" (click)="login()" class="btn btn-primary">NEXT</button>
                     <a href="javascript:void(0);" class="signup">Sign up for a Company ID</a>
                 </div>
             </form>
@@ -50,7 +50,7 @@ export class LoginComponent {
     public form:FormObject;
 
     constructor(public router: Router) {
-
+        this.form = {}
     }
 
     public login() {
@@ -59,8 +59,8 @@ export class LoginComponent {
 }
 
 export interface FormObject {
-    type: string;
-    username:string;
-    password: string;
-    rememberMe: boolean;
+    type?: string;
+    username?:string;
+    password?: string;
+    rememberMe?: boolean;
 }
