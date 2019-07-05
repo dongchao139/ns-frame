@@ -44,7 +44,33 @@ import { Router } from "@angular/router";
                 </div>
             </form>
         </div>
-    `
+    `,
+    styles:[`
+        .login-wrapper, .login-wrapper .login {
+            display: block;
+        }
+
+        .login-wrapper {
+            background-size: 100%;
+            background-position: 0;
+            background-repeat: no-repeat;
+            height: 960px;
+            min-width: 890px;
+        }
+        .login-wrapper .login {
+            background: #fafafa;
+            float: right;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            min-height: 1vh;
+            width: 21rem;
+            height: 26rem;
+            top: 5rem;
+            right: 10rem;
+        }
+    `]
 })
 export class LoginComponent {
     public form:FormObject;
