@@ -67,7 +67,7 @@ import { Router } from "@angular/router";
             min-height: 24rem;
             width: 21rem;
             height: 60%;
-            top: 8%;
+            top: 10%;
             right: 15%;
         }
     `]
