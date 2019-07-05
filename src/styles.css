@@ -3,3 +3,9 @@
   font-family: 'icomoon';   /*字体名称*/
   src: url('./assets/icomoon.ttf');       /*字体源文件*/
 }
+
+html, body {
+    height: 100%;
+    margin:0;
+    padding:0;
+}
