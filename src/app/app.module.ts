@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DynamicDemo} from "./ns-menu-module/dynamic/DynamicDemo";
 import {ContentProjectDemo} from "./ns-menu-module/dynamic/ContentProjectDemo";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import {HttpClientModule} from "@angular/common/http";
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         AppRoutingModule,
         NsFormModule,
         NsMenuModule,
