@@ -34,7 +34,8 @@ import {LoginService} from "./service/LoginService";
                     <div class="clr-input-wrapper">
                         <div class="clr-input-group">
                             <input type="password" name="password" class="clr-input ng-pristine ng-valid ng-touched"
-                                   placeholder="Password" [formControl]="form.controls['password']"/>
+                                   placeholder="Password" [formControl]="form.controls['password']"
+                                    (keydown.enter)="login()"/>
                         </div>
                     </div>
                 </div>
