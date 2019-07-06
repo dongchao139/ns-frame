@@ -29,7 +29,9 @@ export class LoginService {
 
     public storeUrl(url:string) {
         this.redirectUrl = url.substring(0, url.indexOf('#'));
-        this.redirectHash = url.substring(url.indexOf('#'));
+        if (url.indexOf('#') > 0) {
+            this.redirectHash = url.substring(url.indexOf('#'));
+        }
     }
 
 }
