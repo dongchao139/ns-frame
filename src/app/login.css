@@ -1,8 +1,8 @@
 .login-wrapper {
     background-position: 0;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-start;
     flex-direction: row-reverse;
     height: 100%;
-    width: 99.8%;
+    width: 100%;
 }
