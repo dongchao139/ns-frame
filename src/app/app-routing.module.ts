@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/HomeComponent';
-import { LoginComponent } from './LoginComponent';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/HomeComponent';
+import {LoginComponent} from './LoginComponent';
+import {LoginGuard} from "./guard/LoginGuard";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent }
 ];
 

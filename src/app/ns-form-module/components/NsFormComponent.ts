@@ -21,7 +21,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '
         <div class="err-msg" *ngIf="sku.hasError('invalidSku')">SKU must begin with 123</div>
         <input type='text' id="productName" name="productName" placeholder='productName'
                [class.error]="myForm.controls['productName'].invalid"
-               [formControl]="myForm.controls['productName']" [(ngModel)]="productName"/>
+               [formControl]="myForm.controls['productName']"/>
         <button type='button' (click)="onSubmit(myForm.value)">Submit</button>
         <div class="err-msg" *ngIf="myForm.invalid">Form is invalid</div>
     </form>
@@ -32,7 +32,6 @@ export class NsFormComponent implements OnInit, DynamicComponent {
     data: FormConfig;
     myForm: FormGroup;
     sku: AbstractControl;
-    productName: string;
 
     /**
      * 通过模板变量和ViewChild获取dom对象

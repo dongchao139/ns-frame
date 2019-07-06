@@ -2,7 +2,7 @@ import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
 import {FormConfig} from "../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
-import {NsComponent} from "./NsComponent";
+import {NsComponent} from "../home/NsComponent";
 import {NsFormComponent} from "../ns-form-module/components/NsFormComponent";
 
 @Injectable()

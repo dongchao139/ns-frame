@@ -8,10 +8,11 @@ import {
     ViewChild
 } from '@angular/core';
 import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
-import {MenuService} from './MenuService';
+import {MenuService} from '../service/MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import * as $ from "jquery";
 import {NsComponent} from "./NsComponent";
+import {LoginService} from "../service/LoginService";
 
 @Component({
     selector: 'home',
@@ -49,8 +50,12 @@ export class HomeComponent implements OnInit, OnChanges {
     forms: NsComponent<any>[];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private injector: Injector, private menuService: MenuService) {
+                private injector: Injector, private menuService: MenuService,
+                private loginService: LoginService) {
         this.forms = [];
+        if (loginService.redirectHash) {
+            window.location.hash = loginService.redirectHash;
+        }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
