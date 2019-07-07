@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {LoginService} from "./service/LoginService";
+import {LoginService} from "../service/LoginService";
 
 @Component({
     selector: 'login',

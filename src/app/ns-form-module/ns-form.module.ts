@@ -5,10 +5,14 @@ import {FormItemDirective} from './directives/FormItemDirective';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NsFormItemComponent} from "./components/NsFormItem";
+import {NsDynamicFormComponent} from "./components/NsDynamicFormComponent";
 
 @NgModule({
   declarations: [
     NsFormComponent,
+    NsFormItemComponent,
+    NsDynamicFormComponent,
     NsSelectComponent,
     FormItemDirective
   ],

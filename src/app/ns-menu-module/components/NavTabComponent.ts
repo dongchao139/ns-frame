@@ -25,7 +25,7 @@ export class NavTabComponent implements OnInit {
     }
 
     /**
-     * 动态创建组件示例
+     * 根据传入的NsComponent动态创建组件,保存在当前的tab页中
      *
      * ComponentFactoryResolver  组件工厂解析器,负责创建具体组件对应的组件工厂,通过依赖注入获得
      * Injector  依赖注入器,相当于ApplicationContext,通过依赖注入获得

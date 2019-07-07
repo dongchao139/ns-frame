@@ -1,6 +1,6 @@
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {LoginComponent} from './LoginComponent';
+import {LoginComponent} from './login/LoginComponent';
 import {HomeComponent} from './home/HomeComponent';
 import {NsFormModule} from './ns-form-module/ns-form.module';
 import {NsMenuModule} from './ns-menu-module/ns-menu.module';

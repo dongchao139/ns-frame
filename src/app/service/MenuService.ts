@@ -50,12 +50,13 @@ export class MenuService {
         var data: FormConfig = {
             id: 'form-' + url,
             title: url,
-            action: url.substr(url.lastIndexOf('/'))
+            action: url.substr(url.lastIndexOf('/')),
+            items: []
         };
         var navTabItem: NavTabItem = {
             title: url.substr(url.lastIndexOf('/')),
             url: url
         };
-        return new NsComponent(NsFormComponent, data, navTabItem, []);
+        return new NsComponent(NsFormComponent, data, navTabItem);
     }
 }

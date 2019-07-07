@@ -1,13 +1,4 @@
-import {
-    Component,
-    ComponentFactoryResolver,
-    Injector,
-    OnChanges,
-    OnInit,
-    SimpleChanges,
-    ViewChild
-} from '@angular/core';
-import {DynamicLoadDirective} from '../ns-menu-module/directives/DynamicLoadDirective';
+import {Component, ComponentFactoryResolver, Injector, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MenuService} from '../service/MenuService';
 import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import * as $ from "jquery";
@@ -43,11 +34,9 @@ import {LoginService} from "../service/LoginService";
 })
 export class HomeComponent implements OnInit, OnChanges {
 
-    @ViewChild(DynamicLoadDirective, {static: true})
-    dynamicComponent: DynamicLoadDirective;
     menus: NsMenu;
     active: boolean;
-    forms: NsComponent<any>[];
+    forms: NsComponent<any>[];  //每一个tab页中包含一个组件
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector, private menuService: MenuService,
