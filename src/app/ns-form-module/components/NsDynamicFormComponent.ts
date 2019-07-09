@@ -2,6 +2,7 @@ import {Component, Input} from "@angular/core";
 import {FormGroup} from "@angular/forms";
 import {FormConfig, FormItemConfig} from "../FormConfig";
 import {FormConfigService} from "../services/FormConfigService";
+import {DynamicComponent} from "../../home/NsComponent";
 
 @Component({
     selector: 'ns-dynamic-form',
@@ -24,16 +25,18 @@ import {FormConfigService} from "../services/FormConfigService";
     </div>    
     `
 })
-export class NsDynamicFormComponent {
-    @Input() group: FormConfig;
-    @Input() questions: FormItemConfig<any>[] = [];
+export class NsDynamicFormComponent implements DynamicComponent{
+    @Input() data: FormConfig;
+    questions: FormItemConfig<any>[] = [];
     form: FormGroup;
     payLoad = '';
 
     constructor(private qcs: FormConfigService) {  }
 
     ngOnInit() {
-        this.form = this.qcs.toFormGroup(this.group, this.questions);
+        this.questions = this.data.items;
+        this.form = this.qcs.toFormGroup(this.data, this.questions);
+        console.log(this.questions);
     }
 
     onSubmit() {

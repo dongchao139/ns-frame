@@ -1,9 +1,9 @@
 import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
-import {FormConfig} from "../ns-form-module/FormConfig";
+import {FormConfig, FormItemType, SelectConfig} from "../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
 import {NsComponent} from "../home/NsComponent";
-import {NsFormComponent} from "../ns-form-module/components/NsFormComponent";
+import {NsDynamicFormComponent} from "../ns-form-module/components/NsDynamicFormComponent";
 
 @Injectable()
 export class MenuService {
@@ -47,16 +47,37 @@ export class MenuService {
     }
 
     getComponentConfig(url: string): NsComponent<any> {
+        var select1 = new SelectConfig({
+            id: 'select-1',
+            label: '性别',
+            key: 'gender',
+            value:1,
+            type:FormItemType.SELECT,
+            multiple:false,
+            textField:'name',
+            valueField:'id',
+            subdata:[
+                {
+                    key: 1,
+                    value:'男'
+                },{
+                    key:2,
+                    value:'女'
+                }
+            ]
+        });
         var data: FormConfig = {
             id: 'form-' + url,
             title: url,
             action: url.substr(url.lastIndexOf('/')),
-            items: []
+            items: [
+                select1
+            ]
         };
         var navTabItem: NavTabItem = {
             title: url.substr(url.lastIndexOf('/')),
             url: url
         };
-        return new NsComponent(NsFormComponent, data, navTabItem);
+        return new NsComponent(NsDynamicFormComponent, data, navTabItem);
     }
 }

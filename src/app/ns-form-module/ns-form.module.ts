@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NsFormItemComponent} from "./components/NsFormItem";
 import {NsDynamicFormComponent} from "./components/NsDynamicFormComponent";
+import {FormConfigService} from "./services/FormConfigService";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {NsDynamicFormComponent} from "./components/NsDynamicFormComponent";
         ReactiveFormsModule
     ],
   exports: [NsFormComponent],
-  providers: [],
-  entryComponents:[NsSelectComponent,NsFormComponent]
+  providers: [FormConfigService],
+  entryComponents:[NsSelectComponent,NsFormComponent,NsDynamicFormComponent]
 })
 export class NsFormModule { }
