@@ -22,7 +22,7 @@ import {DynamicComponent} from "../../home/NsComponent";
         <div *ngIf="payLoad" class="form-row">
             <strong>Saved the following values</strong><br>{{payLoad}}
         </div>
-    </div>    
+    </div>
     `
 })
 export class NsDynamicFormComponent implements DynamicComponent{

@@ -27,13 +27,13 @@ export class FormItemConfig<T> {
     rules?: any;        //required 验证规则
 
     constructor(opts: any) {
-        this.id = opts.id || 'form-item-demo';
-        this.label = opts.label || '表单项示例';
-        this.key = opts.key || 'name';
-        this.value = opts.value || '';
-        this.type = opts.type || FormItemType.TEXT;
-        this.width = opts.width || 12;
-        this.rules = opts.rules || undefined;
+        this.id     = opts.id       || 'form-item-demo';
+        this.label  = opts.label    || '表单项示例';
+        this.key    = opts.key      || 'name';
+        this.value  = opts.value    || '';
+        this.type   = opts.type     || FormItemType.TEXT;
+        this.width  = opts.width    || 12;
+        this.rules  = opts.rules    || undefined;
     }
 }
 
