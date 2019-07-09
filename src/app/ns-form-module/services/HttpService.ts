@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class HttpService {
@@ -11,7 +11,7 @@ export class HttpService {
         if (url.indexOf('/') == 0) {
             fullUrl = this.baseUrl + url;
         } else {
-            fullUrl = this.get + '/' + url;
+            fullUrl = this.baseUrl + '/' + url;
         }
         return this.http.get(fullUrl, { params: params }).toPromise();
     }
