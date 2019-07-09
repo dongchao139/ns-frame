@@ -1,6 +1,6 @@
 import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
 import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
-import {FormConfig, FormItemType, SelectConfig} from "../ns-form-module/FormConfig";
+import {FormConfig, FormItemConfig, FormItemType, SelectConfig} from "../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
 import {NsComponent} from "../home/NsComponent";
 import {NsDynamicFormComponent} from "../ns-form-module/components/NsDynamicFormComponent";
@@ -47,6 +47,13 @@ export class MenuService {
     }
 
     getComponentConfig(url: string): NsComponent<any> {
+        var text1 = new FormItemConfig({
+            id: 'text-1',
+            label: '姓名',
+            key: 'name',
+            value: '张三',
+            type: FormItemType.TEXT
+        });
         var select1 = new SelectConfig({
             id: 'select-1',
             label: '性别',
@@ -71,7 +78,7 @@ export class MenuService {
             title: url,
             action: url.substr(url.lastIndexOf('/')),
             items: [
-                select1
+                text1, select1
             ]
         };
         var navTabItem: NavTabItem = {
