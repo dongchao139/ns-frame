@@ -3,6 +3,7 @@ export interface TableConfig {
     tableId: string; //表格id
     dataSource: Array<any>;//自定义的table数据
     pageLength: number;//每页显示条数
+    inLineBtn?: string;//行内按钮名称
     isSearch?: boolean;//是否允许列搜索
     isServerMode?: boolean;//是否服务端分页
 }
