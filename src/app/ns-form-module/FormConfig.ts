@@ -39,24 +39,22 @@ export class FormItemConfig<T> {
 
 export class SelectConfig<T> extends FormItemConfig<T> {
     multiple: boolean;
-    textField: string;
-    valueField: string;
     subdata?: SelectOption<T>[];
     url?: string;
     method?: HttpMethod;
     params?: Array<any>;
-    dataSrc?: string;
+    textField?: string;
+    valueField?: string;
 
     constructor(opts: any) {
         super(opts);
         this.multiple   = opts.multiple     || false;
-        this.textField  = opts.textField    || '';
-        this.valueField = opts.valueField   || '';
         this.subdata    = opts.subdata      || [];
         this.url        = opts.url          || '';
-        this.method     = opts.method       || HttpMethod.POST;
+        this.method     = opts.method       || HttpMethod.GET;
         this.params     = opts.params       || [];
-        this.dataSrc    = opts.dataSrc      || '';
+        this.textField  = opts.textField    || '';
+        this.valueField = opts.valueField   || '';
     }
 }
 
