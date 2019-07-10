@@ -1,5 +1,5 @@
 import {FormConfig} from "../FormConfig";
-import {DynamicComponent} from "../../home/NsComponent";
+import {DynamicComponent} from "../../ns-basic-page/components/NsComponent";
 import {Component, ElementRef, OnInit, ViewChild,} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 

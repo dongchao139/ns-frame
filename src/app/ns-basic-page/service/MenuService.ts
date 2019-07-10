@@ -1,9 +1,9 @@
-import {MenuItem, NavTabItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
-import {NsMenuComponent} from "../ns-menu-module/components/NsMenuComponent";
-import {FormConfig, FormItemConfig, FormItemType, SelectConfig} from "../ns-form-module/FormConfig";
+import {MenuItem, NavTabItem, NsMenu} from '../../ns-menu-module/NsMenuConfig';
+import {NsMenuComponent} from "../../ns-menu-module/components/NsMenuComponent";
+import {FormConfig, FormItemConfig, FormItemType, SelectConfig} from "../../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
-import {NsComponent} from "../home/NsComponent";
-import {NsDynamicFormComponent} from "../ns-form-module/components/NsDynamicFormComponent";
+import {NsComponent} from "../components/NsComponent";
+import {NsDynamicFormComponent} from "../../ns-form-module/components/NsDynamicFormComponent";
 
 @Injectable()
 export class MenuService {

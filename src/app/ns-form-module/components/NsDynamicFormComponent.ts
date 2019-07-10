@@ -2,7 +2,7 @@ import {Component, Input} from "@angular/core";
 import {FormGroup} from "@angular/forms";
 import {FormConfig, FormItemConfig} from "../FormConfig";
 import {FormConfigService} from "../services/FormConfigService";
-import {DynamicComponent} from "../../home/NsComponent";
+import {DynamicComponent} from "../../ns-basic-page/components/NsComponent";
 
 @Component({
     selector: 'ns-dynamic-form',

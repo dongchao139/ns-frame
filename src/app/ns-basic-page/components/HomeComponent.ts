@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, Injector, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MenuService} from '../service/MenuService';
-import {MenuItem, NsMenu} from '../ns-menu-module/NsMenuConfig';
+import {MenuItem, NsMenu} from '../../ns-menu-module/NsMenuConfig';
 import * as $ from "jquery";
 import {NsComponent} from "./NsComponent";
 import {LoginService} from "../service/LoginService";
@@ -30,7 +30,7 @@ import {LoginService} from "../service/LoginService";
             </div>
         </div>
     `,
-    styleUrls: ['./home.css']
+    styleUrls: ['../home.css']
 })
 export class HomeComponent implements OnInit, OnChanges {
 

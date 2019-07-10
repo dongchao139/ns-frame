@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DynamicComponent} from "../../home/NsComponent";
+import {DynamicComponent} from "../../ns-basic-page/components/NsComponent";
 
 /**
  * 动态组件可以再创建动态组件

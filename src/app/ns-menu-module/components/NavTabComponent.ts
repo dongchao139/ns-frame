@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {DynamicLoadDirective} from '../directives/DynamicLoadDirective';
-import {NsComponent} from "../../home/NsComponent";
+import {NsComponent} from "../../ns-basic-page/components/NsComponent";
 
 @Component({
     selector: 'ns-tab',
