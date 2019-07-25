@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
 import {Injectable} from "@angular/core";
-import {LoginService} from "../service/LoginService";
+import {LoginService} from "./LoginService";
 
 @Injectable()
 export class LoginGuard implements CanActivate {

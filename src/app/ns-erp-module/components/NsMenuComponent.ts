@@ -1,4 +1,4 @@
-import {MenuItem} from '../NsMenuConfig';
+import {MenuItem} from '../../ns-basic-module/config/NsMenuConfig';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
             </ns-menu-item>
         </ul>
     `,
-    styleUrls: ['../ns-menu.css']
+    styleUrls: ['../styles/ns-menu.css']
 })
 export class NsMenuComponent {
 
@@ -54,7 +54,7 @@ export class NsMenuComponent {
             </ns-menu>
         </li>
     `,
-    styleUrls: ['../ns-menu.css']
+    styleUrls: ['../styles/ns-menu.css']
 })
 export class MenuItemComponent {
     @Input() menuItem: MenuItem;

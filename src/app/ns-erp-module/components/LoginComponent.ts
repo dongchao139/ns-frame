@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {LoginService} from "../service/LoginService";
+import {LoginService} from "../../app-common-directory/LoginService";
+import {MenuService} from "../../app-common-directory/MenuService";
 
 @Component({
     selector: 'login',
@@ -47,13 +48,14 @@ import {LoginService} from "../service/LoginService";
         </form>
     </div>
     `,
-    styleUrls: ['../login.css']
+    styleUrls: ['../styles/login.css']
 })
 export class LoginComponent {
     public form: FormGroup;
     public valid: boolean;
 
-    constructor(public router: Router,fb: FormBuilder,private loginService: LoginService) {
+    constructor(public router: Router,fb: FormBuilder, private loginService: LoginService,
+                private menuService: MenuService) {
         this.form = fb.group({
             'type':'',
             'username':'',
@@ -68,7 +70,7 @@ export class LoginComponent {
             this.valid = false;
         } else {
             this.loginService.saveUser(this.form.value);
-            var url:string = this.loginService.redirectUrl;
+            var url:string = this.menuService.redirectUrl;
             if (url) {
                 this.router.navigate([url]);
             } else {

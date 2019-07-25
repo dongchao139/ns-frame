@@ -1,5 +1,5 @@
 import {Type} from '@angular/core';
-import {NavTabItem} from "../../ns-menu-module/NsMenuConfig";
+import {NavTabItem} from "./config/NsMenuConfig";
 
 export interface DynamicComponent {
     data: any;

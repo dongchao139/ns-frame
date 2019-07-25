@@ -9,7 +9,7 @@ export enum FormItemType {
     REGION='REGION', SUBMIT='SUBMIT'
 }
 
-export interface FormConfig {
+export interface NsFormConfig {
     id: string;         //表单dom的id
     title: string;      //表单标题
     method?: HttpMethod; //提交数据时的请求方式
@@ -27,7 +27,7 @@ export class FormItemConfig<T> {
     rules?: any;        //required 验证规则
 
     constructor(opts: any) {
-        this.id     = opts.id       || 'form-item-demo';
+        this.id     = opts.id       || 'form-item-app-demo';
         this.label  = opts.label    || '表单项示例';
         this.key    = opts.key      || 'name';
         this.value  = opts.value    || '';

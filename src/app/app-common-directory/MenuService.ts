@@ -1,14 +1,15 @@
-import {MenuItem, NavTabItem, NsMenu} from '../../ns-menu-module/NsMenuConfig';
-import {NsMenuComponent} from "../../ns-menu-module/components/NsMenuComponent";
-import {FormConfig, FormItemConfig, FormItemType, SelectConfig} from "../../ns-form-module/FormConfig";
 import {Injectable} from '@angular/core';
-import {NsComponent} from "../components/NsComponent";
-import {NsFormComponent} from "../../ns-form-module/components/NsFormComponent";
+import {MenuItem, NavTabItem} from "../ns-basic-module/config/NsMenuConfig";
+import {NsComponent} from "../ns-basic-module/NsComponent";
+import {FormItemConfig, FormItemType, NsFormConfig, SelectConfig} from "../ns-basic-module/config/NsFormConfig";
+import {NsFormComponent} from "../ns-form-module/components/NsFormComponent";
 
 @Injectable()
 export class MenuService {
+    public redirectUrl:string;
+    public redirectHash:string;
 
-    getMenus(): NsMenu {
+    getMenus(): MenuItem[] {
         let menus: MenuItem[] = [];
         let childMenuList1: MenuItem[] = [];
         let grandMenuList1: MenuItem[] = [];
@@ -42,8 +43,7 @@ export class MenuService {
         menus.push(new MenuItem('菜单一', '/menu1', 1, childMenuList1));
         menus.push(new MenuItem('菜单二', '/menu2', 1, childMenuList2));
         menus.push(new MenuItem('菜单三', '/menu3', 1, childMenuList3));
-
-        return new NsMenu(NsMenuComponent, menus);
+        return menus;
     }
 
     getComponentConfig(url: string): NsComponent<any> {
@@ -73,7 +73,7 @@ export class MenuService {
                 }
             ]
         });
-        var data: FormConfig = {
+        var data: NsFormConfig = {
             id: 'form-' + url,
             title: url,
             action: url.substr(url.lastIndexOf('/')),
@@ -85,6 +85,7 @@ export class MenuService {
             title: url.substr(url.lastIndexOf('/')),
             url: url
         };
+        //TODO 根据不同的配置返回不同的组件(简单工厂模式)
         return new NsComponent(NsFormComponent, data, navTabItem);
     }
 }

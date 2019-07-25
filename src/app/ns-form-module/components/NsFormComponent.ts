@@ -1,8 +1,8 @@
 import {Component, Input} from "@angular/core";
 import {FormGroup} from "@angular/forms";
-import {FormConfig, FormItemConfig} from "../FormConfig";
+import {FormItemConfig, NsFormConfig} from "../../ns-basic-module/config/NsFormConfig";
 import {FormConfigService} from "../services/FormConfigService";
-import {DynamicComponent} from "../../ns-basic-page/components/NsComponent";
+import {DynamicComponent} from "../../ns-basic-module/NsComponent";
 
 @Component({
     selector: 'ns-form',
@@ -26,7 +26,7 @@ import {DynamicComponent} from "../../ns-basic-page/components/NsComponent";
     `
 })
 export class NsFormComponent implements DynamicComponent{
-    @Input() data: FormConfig;
+    @Input() data: NsFormConfig;
     questions: FormItemConfig<any>[] = [];
     form: FormGroup;
     payLoad = '';

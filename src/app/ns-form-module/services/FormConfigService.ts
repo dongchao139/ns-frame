@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
-import {FormConfig, FormItemConfig} from "../FormConfig";
+import {FormItemConfig, NsFormConfig} from "../../ns-basic-module/config/NsFormConfig";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Injectable()
 export class FormConfigService {
 
-    public toFormGroup(formConfig: FormConfig, items: FormItemConfig<any>[]): FormGroup {
+    public toFormGroup(formConfig: NsFormConfig, items: FormItemConfig<any>[]): FormGroup {
         let group: any = {};
 
         items.forEach(item => {

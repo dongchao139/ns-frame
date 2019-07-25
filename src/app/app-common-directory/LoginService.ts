@@ -1,10 +1,12 @@
 import {Injectable} from "@angular/core";
+import {MenuService} from "./MenuService";
 
 @Injectable()
 export class LoginService {
     public user: any;
-    public redirectUrl:string;
-    public redirectHash:string;
+
+    constructor(private menuService: MenuService) {
+    }
 
     public doLogin(value: any): string | boolean {
         if ((<any>value).username != 'admin' || (<any>value).password != '123') {
@@ -28,9 +30,9 @@ export class LoginService {
     }
 
     public storeUrl(url:string) {
-        this.redirectUrl = url.substring(0, url.indexOf('#'));
+        this.menuService.redirectUrl = url.substring(0, url.indexOf('#'));
         if (url.indexOf('#') > 0) {
-            this.redirectHash = url.substring(url.indexOf('#'));
+            this.menuService.redirectHash = url.substring(url.indexOf('#'));
         }
     }
 

@@ -1,9 +1,9 @@
 import {Component, ComponentFactoryResolver, Injector, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MenuService} from '../service/MenuService';
-import {MenuItem, NsMenu} from '../../ns-menu-module/NsMenuConfig';
+import {MenuItem, NsMenu} from '../../ns-basic-module/config/NsMenuConfig';
+import {NsComponent} from "../../ns-basic-module/NsComponent";
+import {NsErpMenuService} from "../NsErpMenuService";
 import * as $ from "jquery";
-import {NsComponent} from "./NsComponent";
-import {LoginService} from "../service/LoginService";
+import {MenuService} from "../../app-common-directory/MenuService";
 
 @Component({
     selector: 'home',
@@ -15,7 +15,7 @@ import {LoginService} from "../service/LoginService";
             <header class="header-6 sub-header">
                 <ns-menu [menuList]='menus.data' (clickMenu)='loadTabByMenu($event)'></ns-menu>
             </header>
-            <nav class="subnav" [class.active]="active">
+            <nav class="subnav">
                 <a href="javascript:void(0);" *ngFor="let nsForm of forms" class="item"
                    [class.active]="nsForm.tabItem.active" (click)="setActive(nsForm)">
                     {{ nsForm.tabItem.title }}
@@ -30,20 +30,19 @@ import {LoginService} from "../service/LoginService";
             </div>
         </div>
     `,
-    styleUrls: ['../home.css']
+    styleUrls: ['../styles/home.css']
 })
 export class HomeComponent implements OnInit, OnChanges {
 
     menus: NsMenu;
-    active: boolean;
     forms: NsComponent<any>[];  //每一个tab页中包含一个组件
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private injector: Injector, private menuService: MenuService,
-                private loginService: LoginService) {
+                private injector: Injector, private menuService: NsErpMenuService,
+                private baseMenuService: MenuService) {
         this.forms = [];
-        if (loginService.redirectHash) {
-            window.location.hash = loginService.redirectHash;
+        if (baseMenuService.redirectHash) {
+            window.location.hash = baseMenuService.redirectHash;
         }
     }
 
@@ -99,13 +98,13 @@ export class HomeComponent implements OnInit, OnChanges {
 
     loadTabByHash() {
         if (location.hash && location.hash != '#undefined') {
-            let nsForm: NsComponent<any> = this.menuService.getComponentConfig(location.hash.substr(1));
+            let nsForm: NsComponent<any> = this.baseMenuService.getComponentConfig(location.hash.substr(1));
             this.openTab(nsForm);
         }
     }
 
     loadTabByMenu(menuItem: MenuItem) {
-        let nsForm: NsComponent<any> = this.menuService.getComponentConfig(menuItem.url);
+        let nsForm: NsComponent<any> = this.baseMenuService.getComponentConfig(menuItem.url);
         //记录锚点路由
         location.hash = menuItem.url;
     }
