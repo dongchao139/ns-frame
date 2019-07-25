@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {MenuItem, NsMenu} from "../ns-basic-module/config/NsMenuConfig";
+import {MenuItem, NsMenu} from "../app-common-directory/config/NsMenuConfig";
 import {NsMenuComponent} from "./components/NsMenuComponent";
-import {MenuService} from "../app-common-directory/MenuService";
+import {MenuService} from "../app-common-directory/service/MenuService";
 
 @Injectable()
-export class NsErpMenuService {
+export class ErpMenuService {
     constructor(private menuService: MenuService) {
 
     }

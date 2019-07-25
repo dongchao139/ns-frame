@@ -5,10 +5,10 @@ import {LoginComponent} from "./components/LoginComponent";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {NsBasicModule} from "../ns-basic-module/ns-basic.module";
 import {MenuItemComponent, NsMenuComponent} from "./components/NsMenuComponent";
 import {NavTabComponent} from "./components/NavTabComponent";
-import {NsErpMenuService} from "./NsErpMenuService";
+import {ErpMenuService} from "./ErpMenuService";
+import {NsBaseModule} from "../app-base-module/ns-base.module";
 
 @NgModule({
     declarations: [
@@ -24,10 +24,10 @@ import {NsErpMenuService} from "./NsErpMenuService";
         FormsModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        NsBasicModule
+        NsBaseModule
     ],
     exports: [HomeComponent, LoginComponent, NsMenuComponent],
-    providers: [NsErpMenuService]
+    providers: [ErpMenuService]
 })
 export class NsErpModule {
 }

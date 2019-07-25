@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {FormGroup} from "@angular/forms";
-import {FormItemConfig, SelectConfig} from "../../ns-basic-module/config/NsFormConfig";
+import {FormItemConfig, SelectConfig} from "../../app-common-directory/config/NsFormConfig";
 
 @Component({
     selector: 'ns-form-item',

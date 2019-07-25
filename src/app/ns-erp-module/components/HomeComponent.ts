@@ -1,9 +1,9 @@
 import {Component, ComponentFactoryResolver, Injector, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MenuItem, NsMenu} from '../../ns-basic-module/config/NsMenuConfig';
-import {NsComponent} from "../../ns-basic-module/NsComponent";
-import {NsErpMenuService} from "../NsErpMenuService";
+import {MenuItem, NsMenu} from '../../app-common-directory/config/NsMenuConfig';
+import {NsComponent} from "../../app-common-directory/NsComponent";
+import {ErpMenuService} from "../ErpMenuService";
 import * as $ from "jquery";
-import {MenuService} from "../../app-common-directory/MenuService";
+import {MenuService} from "../../app-common-directory/service/MenuService";
 
 @Component({
     selector: 'home',
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, OnChanges {
     forms: NsComponent<any>[];  //每一个tab页中包含一个组件
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private injector: Injector, private menuService: NsErpMenuService,
+                private injector: Injector, private menuService: ErpMenuService,
                 private baseMenuService: MenuService) {
         this.forms = [];
         if (baseMenuService.redirectHash) {

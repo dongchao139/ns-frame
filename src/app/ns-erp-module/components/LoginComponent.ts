@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {LoginService} from "../../app-common-directory/LoginService";
-import {MenuService} from "../../app-common-directory/MenuService";
+import {LoginService} from "../../app-common-directory/service/LoginService";
+import {MenuService} from "../../app-common-directory/service/MenuService";
 
 @Component({
     selector: 'login',

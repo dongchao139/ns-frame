@@ -1,4 +1,4 @@
-import {MenuItem} from '../../ns-basic-module/config/NsMenuConfig';
+import {MenuItem} from '../../app-common-directory/config/NsMenuConfig';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
