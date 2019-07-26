@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, Injector, ViewChild} from '@angular/core';
-import {DynamicComponent, NsComponent} from '../app-common-directory/NsComponent';
+import {DynamicComponent, NsComponent} from '../app-base-module/NsComponent';
 import {ContentProjectDemo} from "./ContentProjectDemo";
 import {DynamicLoadDirective} from "../app-base-module/directive/DynamicLoadDirective";
 

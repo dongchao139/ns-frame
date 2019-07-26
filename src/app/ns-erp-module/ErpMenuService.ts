@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {MenuItem, NsMenu} from "../app-common-directory/config/NsMenuConfig";
+import {MenuItem, NsMenu} from "../app-base-module/config/NsMenuConfig";
 import {NsMenuComponent} from "./components/NsMenuComponent";
 import {MenuService} from "../app-common-directory/service/MenuService";
 

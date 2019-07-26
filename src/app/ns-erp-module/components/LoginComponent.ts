@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {LoginService} from "../../app-common-directory/service/LoginService";
-import {MenuService} from "../../app-common-directory/service/MenuService";
+import {AbstractLoginService} from "../../app-base-module/abstract-services/AbstractLoginService";
+import {AbstractMenuService} from "../../app-base-module/abstract-services/AbstractMenuService";
 
 @Component({
     selector: 'login',
@@ -54,8 +54,8 @@ export class LoginComponent {
     public form: FormGroup;
     public valid: boolean;
 
-    constructor(public router: Router,fb: FormBuilder, private loginService: LoginService,
-                private menuService: MenuService) {
+    constructor(public router: Router,fb: FormBuilder, private loginService: AbstractLoginService,
+                private menuService: AbstractMenuService) {
         this.form = fb.group({
             'type':'',
             'username':'',

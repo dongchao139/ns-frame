@@ -1,9 +1,9 @@
 import {Component, ComponentFactoryResolver, Injector, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MenuItem, NsMenu} from '../../app-common-directory/config/NsMenuConfig';
-import {NsComponent} from "../../app-common-directory/NsComponent";
+import {MenuItem, NsMenu} from '../../app-base-module/config/NsMenuConfig';
+import {NsComponent} from "../../app-base-module/NsComponent";
 import {ErpMenuService} from "../ErpMenuService";
 import * as $ from "jquery";
-import {MenuService} from "../../app-common-directory/service/MenuService";
+import {AbstractMenuService} from "../../app-base-module/abstract-services/AbstractMenuService";
 
 @Component({
     selector: 'home',
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnChanges {
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private injector: Injector, private menuService: ErpMenuService,
-                private baseMenuService: MenuService) {
+                private baseMenuService: AbstractMenuService) {
         this.forms = [];
         if (baseMenuService.redirectHash) {
             window.location.hash = baseMenuService.redirectHash;

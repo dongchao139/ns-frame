@@ -1,11 +1,13 @@
 import {Injectable} from "@angular/core";
 import {MenuService} from "./MenuService";
+import {AbstractLoginService} from "../../app-base-module/abstract-services/AbstractLoginService";
 
 @Injectable()
-export class LoginService {
+export class LoginService extends AbstractLoginService{
     public user: any;
 
     constructor(private menuService: MenuService) {
+        super();
     }
 
     public doLogin(value: any): string | boolean {

@@ -1,8 +1,8 @@
 import {Component, Input} from "@angular/core";
 import {FormGroup} from "@angular/forms";
-import {FormItemConfig, NsFormConfig} from "../../app-common-directory/config/NsFormConfig";
+import {FormItemConfig, NsFormConfig} from "../../app-base-module/config/NsFormConfig";
 import {FormConfigService} from "../services/FormConfigService";
-import {DynamicComponent} from "../../app-common-directory/NsComponent";
+import {DynamicComponent} from "../../app-base-module/NsComponent";
 
 @Component({
     selector: 'ns-form',

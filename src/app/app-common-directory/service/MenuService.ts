@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {MenuItem, NavTabItem} from "../config/NsMenuConfig";
-import {NsComponent} from "../NsComponent";
-import {FormItemConfig, FormItemType, NsFormConfig, SelectConfig} from "../config/NsFormConfig";
+import {MenuItem, NavTabItem} from "../../app-base-module/config/NsMenuConfig";
+import {NsComponent} from "../../app-base-module/NsComponent";
+import {FormItemConfig, FormItemType, NsFormConfig, SelectConfig} from "../../app-base-module/config/NsFormConfig";
 import {NsFormComponent} from "../../ns-form-module/components/NsFormComponent";
+import {AbstractMenuService} from "../../app-base-module/abstract-services/AbstractMenuService";
 
 @Injectable()
-export class MenuService {
+export class MenuService extends AbstractMenuService{
     public redirectUrl:string;
     public redirectHash:string;
 

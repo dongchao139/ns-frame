@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {FormItemConfig, NsFormConfig} from "../../app-common-directory/config/NsFormConfig";
+import {FormItemConfig, NsFormConfig} from "../../app-base-module/config/NsFormConfig";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Injectable()
