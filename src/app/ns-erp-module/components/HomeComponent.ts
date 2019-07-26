@@ -15,7 +15,7 @@ import {AbstractMenuService} from "../../app-base-module/abstract-services/Abstr
             <header class="header-6 sub-header">
                 <ns-menu [menuList]='menus.data' (clickMenu)='loadTabByMenu($event)'></ns-menu>
             </header>
-            <nav class="subnav">
+            <nav class="subnav" [class.active]="active">
                 <a href="javascript:void(0);" *ngFor="let nsForm of forms" class="item"
                    [class.active]="nsForm.tabItem.active" (click)="setActive(nsForm)">
                     {{ nsForm.tabItem.title }}
@@ -35,6 +35,7 @@ import {AbstractMenuService} from "../../app-base-module/abstract-services/Abstr
 export class HomeComponent implements OnInit, OnChanges {
 
     menus: NsMenu;
+    active: boolean;
     forms: NsComponent<any>[];  //每一个tab页中包含一个组件
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,

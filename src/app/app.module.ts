@@ -31,8 +31,6 @@ import {AbstractMenuService} from "./app-base-module/abstract-services/AbstractM
     providers: [
         {provide: AbstractLoginService, useClass: LoginService},
         {provide: AbstractMenuService, useClass: MenuService},
-        MenuService,
-        LoginService,
         LoginGuard
     ],
     entryComponents:[DynamicDemo, ContentProjectDemo],

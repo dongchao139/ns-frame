@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
-import {MenuService} from "./MenuService";
 import {AbstractLoginService} from "../../app-base-module/abstract-services/AbstractLoginService";
+import {AbstractMenuService} from "../../app-base-module/abstract-services/AbstractMenuService";
 
 @Injectable()
-export class LoginService extends AbstractLoginService{
+export class LoginService extends AbstractLoginService {
     public user: any;
 
-    constructor(private menuService: MenuService) {
+    constructor(private menuService: AbstractMenuService) {
         super();
     }
 
@@ -14,6 +14,7 @@ export class LoginService extends AbstractLoginService{
         if ((<any>value).username != 'admin' || (<any>value).password != '123') {
             return 'error username or password';
         }
+
         return false;
     }
 
