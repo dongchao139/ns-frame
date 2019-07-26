@@ -54,7 +54,7 @@ export class LoginComponent {
     public form: FormGroup;
     public valid: boolean;
 
-    constructor(public router: Router,fb: FormBuilder, private loginService: AbstractLoginService,
+    constructor(public router: Router, fb: FormBuilder, private loginService: AbstractLoginService,
                 private menuService: AbstractMenuService) {
         this.form = fb.group({
             'type':'',

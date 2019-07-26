@@ -12,6 +12,8 @@ import {LoginGuard} from "./app-common-directory/LoginGuard";
 import {MenuService} from "./app-common-directory/service/MenuService";
 import {CommonModule} from "@angular/common";
 import {NsDemoModule} from "./app-demo-module/ns-demo-module";
+import {AbstractLoginService} from "./app-base-module/abstract-services/AbstractLoginService";
+import {AbstractMenuService} from "./app-base-module/abstract-services/AbstractMenuService";
 
 @NgModule({
     declarations: [
@@ -26,7 +28,13 @@ import {NsDemoModule} from "./app-demo-module/ns-demo-module";
         NsErpModule,
         NsDemoModule
     ],
-    providers: [LoginService, LoginGuard, MenuService],
+    providers: [
+        {provide: AbstractLoginService, useClass: LoginService},
+        {provide: AbstractMenuService, useClass: MenuService},
+        MenuService,
+        LoginService,
+        LoginGuard
+    ],
     entryComponents:[DynamicDemo, ContentProjectDemo],
     bootstrap: [AppComponent]
 })
