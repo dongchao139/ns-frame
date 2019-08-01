@@ -1,6 +1,7 @@
-import {Component, Input} from "@angular/core";
-import {FormGroup} from "@angular/forms";
+import {Component, Input, OnInit} from "@angular/core";
+import {AbstractControl, FormGroup} from "@angular/forms";
 import {FormItemConfig, SelectConfig} from "../../app-base-module/config/NsFormConfig";
+import {Subject} from "rxjs";
 
 @Component({
     selector: 'ns-form-item',
@@ -13,7 +14,7 @@ import {FormItemConfig, SelectConfig} from "../../app-base-module/config/NsFormC
                 <input *ngSwitchCase="'TEXT'" [formControlName]="question.key"
                        [id]="question.key" [type]="question.type">
 
-                <select [id]="question.key" *ngSwitchCase="'SELECT'" [formControlName]="question.key">
+                <select (change)="onInput()" [id]="question.key" *ngSwitchCase="'SELECT'" [formControlName]="question.key">
                     <option *ngFor="let opt of question.subdata" [value]="opt.key">{{opt.value}}</option>
                 </select>
 
@@ -23,8 +24,29 @@ import {FormItemConfig, SelectConfig} from "../../app-base-module/config/NsFormC
         </div>
     `
 })
-export class NsFormItemComponent {
+export class NsFormItemComponent implements OnInit{
     @Input() question: FormItemConfig<any> | SelectConfig<any>;
     @Input() form: FormGroup;
-    get isValid() { return this.form.controls[this.question.key].valid; }
+    @Input() beforeSubject?: Subject<any>;
+    @Input() afterSubject?: Subject<any>;
+    private formControl: AbstractControl;
+
+    ngOnInit(): void {
+        this.formControl = this.form.controls[this.question.key];
+        if (this.beforeSubject) {
+            this.beforeSubject.subscribe((param: any) => {
+                //TODO 根据参数查询options数据
+            })
+        }
+    }
+
+    get isValid() {
+        return this.formControl.valid;
+    }
+
+    onInput() {
+        if (this.afterSubject) {
+            this.afterSubject.next(this.formControl.value);
+        }
+    }
 }

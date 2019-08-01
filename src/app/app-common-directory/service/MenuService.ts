@@ -74,13 +74,37 @@ export class MenuService extends AbstractMenuService{
                 }
             ]
         });
+        var select2 = new SelectConfig({
+            id: 'select-2',
+            label: '学历',
+            key: 'education',
+            value:1,
+            type:FormItemType.SELECT,
+            multiple:false,
+            textField:'name',
+            valueField:'id',
+            subdata:[
+                {
+                    key:0,
+                    value: '专科'
+                },
+                {
+                    key: 1,
+                    value: '本科'
+                },{
+                    key:2,
+                    value: '研究生'
+                }
+            ]
+        });
         var data: NsFormConfig = {
             id: 'form-' + url,
             title: url,
             action: url.substr(url.lastIndexOf('/')),
             items: [
-                text1, select1
-            ]
+                text1, select1, select2
+            ],
+            cascade: ['select-1','select-2']
         };
         var navTabItem: NavTabItem = {
             title: url.substr(url.lastIndexOf('/')),

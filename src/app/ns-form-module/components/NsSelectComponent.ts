@@ -3,7 +3,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'ns-select',
-    templateUrl: './ns-select.html'
+    template:`
+        <select>
+            <option>text1</option>
+            <option>text2</option>
+        </select>
+    `
 })
 export class NsSelectComponent<T> implements OnInit {
 

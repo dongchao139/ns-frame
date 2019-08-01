@@ -15,6 +15,7 @@ export interface NsFormConfig {
     method?: HttpMethod; //提交数据时的请求方式
     action?: string;     //提交数据的url
     items: FormItemConfig<any>[]; //包含的表单项目
+    cascade?: Array<string>;
 }
 
 export class FormItemConfig<T> {
