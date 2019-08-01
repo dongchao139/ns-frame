@@ -14,17 +14,12 @@ export class LoginService extends AbstractLoginService {
         if ((<any>value).username != 'admin' || (<any>value).password != '123') {
             return 'error username or password';
         }
-
+        this.user = value;
         return false;
     }
 
     public doLogout(): boolean {
         this.user = null;
-        return true;
-    }
-
-    public saveUser(user: any): boolean {
-        this.user = user;
         return true;
     }
 

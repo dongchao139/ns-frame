@@ -69,7 +69,6 @@ export class LoginComponent {
         if (msg) {
             this.valid = false;
         } else {
-            this.loginService.saveUser(this.form.value);
             var url:string = this.menuService.redirectUrl;
             if (url) {
                 this.router.navigate([url]);
