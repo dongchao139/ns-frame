@@ -8,7 +8,6 @@ export class LoginGuard implements CanActivate {
     constructor(private loginService:AbstractLoginService,private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-        console.log(this.router);
         if (this.loginService.hasLogin()){
             return true;
         } else {

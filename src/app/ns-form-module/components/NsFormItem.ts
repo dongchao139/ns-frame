@@ -27,6 +27,7 @@ import {Subject} from "rxjs";
 export class NsFormItemComponent implements OnInit{
     @Input() question: FormItemConfig<any> | SelectConfig<any>;
     @Input() form: FormGroup;
+    //用于级联下拉框的主题
     @Input() beforeSubject?: Subject<any>;
     @Input() afterSubject?: Subject<any>;
     private formControl: AbstractControl;

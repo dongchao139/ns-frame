@@ -104,7 +104,7 @@ export class MenuService extends AbstractMenuService{
             items: [
                 text1, select1, select2
             ],
-            cascade: ['select-1','select-2']
+            cascade: [['select-1','select-2']]
         };
         var navTabItem: NavTabItem = {
             title: url.substr(url.lastIndexOf('/')),

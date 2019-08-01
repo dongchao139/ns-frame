@@ -31,7 +31,7 @@ import {Subject} from "rxjs";
 export class NsFormComponent implements DynamicComponent {
     @Input() data: NsFormConfig;
     questions: FormItemConfig<any>[] = [];
-    cascadeSubjects: { [key: string]: Subject<any> } [] = [];
+    cascadeSubjects: { key_1: string, key_2: string, value: Subject<any> } [] = [];
 
     form: FormGroup;
     payLoad = '';
@@ -47,38 +47,32 @@ export class NsFormComponent implements DynamicComponent {
 
     initCascadeSubjects() {
         if (this.data.cascade && this.data.cascade.length > 0) {
-            for (let i = 0; i < this.data.cascade.length; i++) {
-                let itemId = this.data.cascade[i];
-                let items: FormItemConfig<any>[] = this.data.items;
-                for (var item of items) {
-                    if (item.id == itemId) {
-                        var key = itemId.toString();
-                        this.cascadeSubjects[i] = {};
-                        this.cascadeSubjects[i][itemId] = new Subject<any>();
-                    }
+            for (let cas of this.data.cascade) {
+                if (cas != null && cas.length > 0) {
+                    var item = {
+                        key_1: cas[0],
+                        key_2: cas[1],
+                        value: new Subject<any>()
+                    };
+                    this.cascadeSubjects.push(item);
                 }
             }
         }
     }
 
     beforeCascade(itemId: string): Subject<any> {
-        if (this.cascadeSubjects) {
-            for (let i = 0; i < this.cascadeSubjects.length; i++) {
-                if (this.cascadeSubjects[i].hasOwnProperty(itemId) && i > 0) {
-                    let key = Object.keys(this.cascadeSubjects[i - 1])[0];
-                    return this.cascadeSubjects[i - 1][key];
-                }
+        for (let i = 0; i < this.cascadeSubjects.length; i++) {
+            if (this.cascadeSubjects[i].key_2 == itemId) {
+                return this.cascadeSubjects[i]['value'];
             }
         }
         return null;
     }
 
     afterCascade(itemId: string): Subject<any> {
-        if (this.cascadeSubjects) {
-            for (let i = 0; i < this.cascadeSubjects.length; i++) {
-                if (this.cascadeSubjects[i].hasOwnProperty(itemId)) {
-                    return this.cascadeSubjects[i][itemId];
-                }
+        for (let i = 0; i < this.cascadeSubjects.length; i++) {
+            if (this.cascadeSubjects[i].key_1 == itemId) {
+                return this.cascadeSubjects[i]['value'];
             }
         }
         return null;
